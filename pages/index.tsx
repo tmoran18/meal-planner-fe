@@ -1,5 +1,6 @@
 import Layout from '../components/layout';
 import Head from 'next/head';
+import Meals from '../components/Meals.js/Meals';
 
 // { allPosts }: Props
 const Index = () => {
@@ -12,7 +13,10 @@ const Index = () => {
 						name='viewport'
 						content='width=device-width, initial-scale=1.0'></meta>
 				</Head>
-				<div>Content</div>
+				<div>
+					Content
+					<Meals />
+				</div>
 			</Layout>
 		</>
 	);
