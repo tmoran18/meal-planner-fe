@@ -80,15 +80,17 @@ const DropDownList = ({
 					})}
 				</div>
 			)}
-			<div>
-				{/* TODO, turn selected ingredients into component */}
-				<h3>Selected Ingredients:</h3>
-				{selectedIngredients.map((ingredient) => (
-					<p>
-						{ingredient.name}, {ingredient.qty} {ingredient.unit}
-					</p>
-				))}
-			</div>
+			{selectedIngredients.length > 0 && (
+				<div>
+					{/* TODO, turn selected ingredients into component */}
+					<h3>Selected Ingredients:</h3>
+					{selectedIngredients.map((ingredient) => (
+						<p>
+							{ingredient.name}, {ingredient.qty} {ingredient.unit}
+						</p>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
