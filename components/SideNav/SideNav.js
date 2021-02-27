@@ -5,8 +5,8 @@ import SignedOutLinks from '../SignedOutLinks/SignedOutLinks';
 const SideNav = () => {
 	return (
 		<nav className={styles.sidenav}>
-			{/* <SignedInLinks /> */}
-			<SignedOutLinks />
+			<SignedInLinks />
+			{/* <SignedOutLinks /> */}
 		</nav>
 	);
 };

@@ -9,7 +9,7 @@ const SignedInLinks = () => {
 					<Link href='/'>
 						<a className={styles.link}>Meals</a>
 					</Link>
-					<Link href='/'>
+					<Link href='/create-meal'>
 						<a className={styles.link}>Create Meal</a>
 					</Link>
 					<Link href='/'>

@@ -1,0 +1,30 @@
+.input {
+	min-width: 300px;
+	height: 30px;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+}
+
+.container {
+	margin: 100px;
+	min-width: 300px;
+	border: 1px solid red;
+}
+
+.list_item {
+	padding: 15px;
+	border-bottom: 1px solid #eee;
+}
+
+.selected_list_item {
+	padding: 15px;
+	border-bottom: 1px solid #eee;
+	background: rgba(0, 128, 0, 0.336);
+}
+
+.add_btn {
+	border: 1px solid red;
+	border-radius: 200px;
+	padding: 5px;
+	cursor: pointer;
+}
