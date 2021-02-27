@@ -1,25 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
 
 body,
 html {
-  font-family: Montserrat;
-  padding: 0px;
-  margin: 0px;
-  box-sizing: border-box;
-  height: 100%;
+	font-family: Montserrat;
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+	height: 100%;
 }
 
 :root {
-  --text: #828ea6;
-  --l_grey: #fafafc;
-  --border: #e8e8f0;
-  --weight_400: 400;
+	--text: #828ea6;
+	--l_grey: #fafafc;
+	--border: #e8e8f0;
+	--weight_400: 400;
+	--green_selected: rgb(136, 188, 127, 0.2);
 }
 
 .weight_300 {
-  font-weight: 300;
+	font-weight: 300;
 }
 
 .text_center {
-  text-align: center;
+	text-align: center;
 }

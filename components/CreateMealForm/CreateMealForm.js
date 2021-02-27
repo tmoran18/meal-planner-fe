@@ -73,9 +73,21 @@ const CreateMealForm = () => {
 		}
 	};
 
+	const resetImageInput = () => {
+		imageFileInput.current.value = '';
+	};
+
 	return (
-		<div>
-			<h1>Signup</h1>
+		<div className={styles.form_container}>
+			<h1
+				style={{
+					color: '#828ea6',
+					textAlign: 'center',
+					marginBottom: '50px',
+					fontWeight: '500',
+				}}>
+				Create a Meal
+			</h1>
 			<Formik
 				initialValues={{
 					name: '',
@@ -92,20 +104,46 @@ const CreateMealForm = () => {
 					setSubmitting(false);
 				}}>
 				<Form className={styles.form}>
-					<label htmlFor='name'>Name</label>
-					<Field id='name' name='name' required />
+					<label className={styles.label} htmlFor='name'>
+						Name
+					</label>
+					<Field className={styles.input} id='name' name='name' required />
 
-					<label htmlFor='secondary_name'>Blurb</label>
-					<Field id='secondary_name' name='secondary_name' required />
-					<label htmlFor='secondary_name'>Meal Image</label>
-					<input
-						ref={imageFileInput}
-						type='file'
-						name='imageURL'
-						id='imageURL'
+					<label className={styles.label} htmlFor='secondary_name'>
+						Blurb
+					</label>
+					<Field
+						className={styles.input}
+						id='secondary_name'
+						name='secondary_name'
 						required
-						onChange={(e) => setImageSelected(e.target.files[0])}
 					/>
+
+					<div className={styles.file_input}>
+						<label className={styles.label} htmlFor='secondary_name'>
+							Meal Image
+						</label>
+						<input
+							ref={imageFileInput}
+							type='file'
+							name='imageURL'
+							id='imageURL'
+							required
+							onChange={(e) => setImageSelected(e.target.files[0])}
+						/>
+						<div className={styles.file_input_cancel}>
+							or{' '}
+							<span
+								onClick={resetImageInput}
+								style={{
+									fontWeight: 600,
+									fontSize: '12px',
+									cursor: 'pointer',
+								}}>
+								cancel
+							</span>
+						</div>
+					</div>
 
 					<DropDownList
 						ingredients={ingredients}
@@ -113,7 +151,9 @@ const CreateMealForm = () => {
 						removeIngredient={removeIngredient}
 						selectedIngredients={ingredientsSelected}
 					/>
-					<button type='submit'>Submit</button>
+					<button className={styles.submit_btn} type='submit'>
+						Create Meal
+					</button>
 				</Form>
 			</Formik>
 		</div>
