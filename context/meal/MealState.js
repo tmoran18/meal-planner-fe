@@ -8,7 +8,7 @@ const MealState = (props) => {
 	const intialState = {
 		meals: [
 			{
-				_id: { $oid: '602e3c399d034233f0ddb67b' },
+				_id: { $oid: '602e3c399d034233f0ddb67z' },
 				ingredients: [
 					{ name: 'Rice', unit: 'cup', qty: '2' },
 					{ name: 'Chicken', unit: '', qty: '4' },
@@ -33,7 +33,7 @@ const MealState = (props) => {
 				secondary_name: 'with fish balls',
 				image_URL:
 					'https://res.cloudinary.com/dsjhcek2q/image/upload/v1612864540/meal-shopper/parmesan-mustard-crusted-chicken_vtw1wb.jpg',
-				user: { $oid: '602dd36618d09833e08893fd' },
+				user: { $oid: '602dd36618d09833e08893fp' },
 				date: { $date: { $numberLong: '1613642927805' } },
 				__v: { $numberInt: '0' },
 			},
@@ -49,12 +49,12 @@ const MealState = (props) => {
 				secondary_name: 'with fish balls',
 				image_URL:
 					'https://res.cloudinary.com/dsjhcek2q/image/upload/v1612864540/meal-shopper/parmesan-mustard-crusted-chicken_vtw1wb.jpg',
-				user: { $oid: '602dd36618d09833e08893fd' },
+				user: { $oid: '602dd36618d09833e08893fz' },
 				date: { $date: { $numberLong: '1613642927805' } },
 				__v: { $numberInt: '0' },
 			},
 			{
-				_id: { $oid: '602e3dc29d034233f0ddb67e' },
+				_id: { $oid: '602e3dc29d034233f0ddb62e' },
 				ingredients: [{ name: 'Potatoes', unit: '', qty: '102' }],
 				name: 'Chips',
 				secondary_name: 'with Gravy',
@@ -71,7 +71,7 @@ const MealState = (props) => {
 
 	// Add Meal
 	const addMeal = (meal) => {
-		meal.id = uuid();
+		meal._id = uuid();
 		dispatch({ type: ADD_MEAL, payload: meal });
 	};
 
