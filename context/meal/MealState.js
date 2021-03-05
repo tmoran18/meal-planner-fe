@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 import MealContext from './mealContext';
 import mealReducer from './mealReducer';
 import { ADD_MEAl, DELETE_MEAL, UPDATE_MEAL } from '../types';
@@ -70,6 +70,10 @@ const MealState = (props) => {
 	const [state, dispatch] = useReducer(mealReducer, intialState);
 
 	// Add Meal
+	const addMeal = (meal) => {
+		meal.id = uuid();
+		dispatch({ type: ADD_MEAL, payload: meal });
+	};
 
 	// Delete Meal
 
@@ -79,6 +83,7 @@ const MealState = (props) => {
 		<MealContext.Provider
 			value={{
 				meals: state.meals,
+				addMeal,
 			}}>
 			{props.children}
 		</MealContext.Provider>
