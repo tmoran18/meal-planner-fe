@@ -1,3 +1,6 @@
 export const ADD_MEAL = 'ADD_MEAL';
 export const DELETE_MEAL = 'DELETE_MEAL';
 export const UPDATE_MEAL = 'UPDATE_MEAL';
+export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';

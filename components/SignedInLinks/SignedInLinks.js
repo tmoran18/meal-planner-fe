@@ -12,7 +12,7 @@ const SignedInLinks = () => {
 					<Link href='/create-meal'>
 						<a className={styles.link}>Create Meal</a>
 					</Link>
-					<Link href='/'>
+					<Link href='/ingredients'>
 						<a className={styles.link}>Ingredients</a>
 					</Link>
 					<Link href='/create-ingredient'>
