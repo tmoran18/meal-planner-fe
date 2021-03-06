@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import Layout from '../components/layout';
 import Head from 'next/head';
-import Meals from '../components/Meals.js/Meals';
+import MealContext from '../context/meal/mealContext';
+import MealCard from '../components/MealCard/MealCard';
 
 const Index = () => {
+	const mealContext = useContext(MealContext);
 	return (
 		<>
 			<Layout>
@@ -12,12 +15,14 @@ const Index = () => {
 						name='viewport'
 						content='width=device-width, initial-scale=1.0'></meta>
 				</Head>
-				<div>{/* <Meals /> */}</div>
+				<div>
+					{mealContext.meals.map((meal) => (
+						<MealCard {...meal} />
+					))}
+				</div>
 			</Layout>
 			<style jsx>{`
 				div {
-					display: flex;
-					flex-wrap: wrap;
 				}
 			`}</style>
 		</>
