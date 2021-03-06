@@ -1,13 +1,16 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Formik, Field, Form } from 'formik';
 import Axios from 'axios';
 import styles from './createmealform.module.css';
 import DropDownList from '../DropDownList/DropDownList';
+import MealContext from '../../context/meal/mealContext';
 
 const CreateMealForm = () => {
 	const [imageSelected, setImageSelected] = useState('');
 	const [ingredientsSelected, setIngredientsSelected] = useState([]);
 	const imageFileInput = useRef();
+
+	const mealContext = useContext(MealContext);
 
 	const ingredients = [
 		{
@@ -67,7 +70,7 @@ const CreateMealForm = () => {
 		if (imageURL) {
 			values.image_URL = imageURL;
 			values.ingredients = ingredientsSelected;
-			console.log(JSON.stringify(values));
+			mealContext.addMeal(values);
 		} else {
 			alert('Errors');
 		}

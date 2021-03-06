@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Layout from '../components/layout';
 import Head from 'next/head';
 import MealContext from '../context/meal/mealContext';
+import MealCard from '../components/MealCard/MealCard';
 
 const Index = () => {
 	const mealContext = useContext(MealContext);
@@ -16,9 +17,7 @@ const Index = () => {
 				</Head>
 				<div>
 					{mealContext.meals.map((meal) => (
-						<div style={{ flexDirection: 'column' }} key={meal._id.$oid}>
-							<p>{meal.name}</p>
-						</div>
+						<MealCard {...meal} />
 					))}
 				</div>
 			</Layout>
