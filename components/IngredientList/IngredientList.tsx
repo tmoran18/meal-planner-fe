@@ -1,11 +1,18 @@
 import styles from './ingredientlist.module.css';
 import IngredientItem from '../IngredientItem/IngredientItem';
-import Ingredients from '../../pages/ingredients';
 
-const IngredientList = ({ ingredients }) => {
+interface Props {
+	ingredients: {
+		name: string;
+		unit?: string;
+		_id: number;
+	}[];
+}
+
+const IngredientList: React.FC<Props> = ({ ingredients }) => {
 	return (
 		<div>
-			{ingredients.map((ingredient, index) => (
+			{ingredients.map((ingredient, index: number) => (
 				<IngredientItem
 					name={ingredient.name}
 					index={index}

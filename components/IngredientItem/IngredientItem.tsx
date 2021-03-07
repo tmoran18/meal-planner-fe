@@ -17,11 +17,11 @@ const IngredientItem: React.FC<Props> = ({ name, unit, index, id }) => {
 		}
 	};
 
-	const deleteIngredient = (id) => {
+	const deleteIngredient = (id: number) => {
 		alert(id);
 	};
 
-	const editIngredient = (id) => {
+	const editIngredient = (id: number) => {
 		alert(id);
 	};
 

@@ -6,6 +6,8 @@ import IngredientList from '../components/IngredientList/IngredientList';
 
 const Ingredients = () => {
 	const ingredientContext = useContext(IngredientContext);
+	const ingredients = ingredientContext.ingredients;
+
 	return (
 		<>
 			<Layout>
@@ -17,7 +19,8 @@ const Ingredients = () => {
 				</Head>
 				<div>
 					Ingredients
-					<IngredientList ingredients={ingredientContext.ingredients} />
+					{console.log(typeof ingredients)}
+					<IngredientList ingredients={ingredients} />
 				</div>
 			</Layout>
 			<style jsx>{``}</style>
