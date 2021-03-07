@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Layout from '../components/layout';
 import Head from 'next/head';
 import IngredientContext from '../context/ingredient/ingredientContext';
+import IngredientList from '../components/IngredientList/IngredientList';
 
 const Ingredients = () => {
 	const ingredientContext = useContext(IngredientContext);
@@ -16,11 +17,7 @@ const Ingredients = () => {
 				</Head>
 				<div>
 					Ingredients
-					{ingredientContext.ingredients.map((ingredient) => (
-						<div key={ingredient.id}>
-							<p>{ingredient.name}</p>
-						</div>
-					))}
+					<IngredientList ingredients={ingredientContext.ingredients} />
 				</div>
 			</Layout>
 			<style jsx>{``}</style>
