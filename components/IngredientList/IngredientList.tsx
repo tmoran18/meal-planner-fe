@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import styles from './ingredientlist.module.css';
 import IngredientItem from '../IngredientItem/IngredientItem';
 
@@ -22,7 +23,9 @@ const IngredientList: React.FC<Props> = ({ ingredients }) => {
 					placeholder='Search Ingredient...'
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
-				<button className={styles.btn}>Add Ingredient</button>
+				<Link href='/create-ingredient'>
+					<button className={styles.btn}>Add Ingredient</button>
+				</Link>
 			</div>
 			<div className={styles.list_headings}>
 				<span>Ingredient</span>
