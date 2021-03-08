@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './dropdownlist.module.css';
+import AddIngredientMealItem from '../AddIngredientMealItem/AddIngredientMealItem';
+import RemoveIngredientMealItem from '../RemoveIngredientMealItem/RemoveIngredientMealItem';
 
 const DropDownList = ({
 	ingredients,
@@ -54,36 +56,19 @@ const DropDownList = ({
 						) {
 							// If the ingredient is already in the selected list, you want to show the remove component
 							return (
-								<div className={styles.selected_list_item} key={ingredient._id}>
-									{ingredient.name}, &nbsp;{ingredient.qty}
-									&nbsp;{ingredient.unit}
-									<img
-										onClick={(e) =>
-											removeIngredient(selectedIngredients, ingredient)
-										}
-										className={styles.btn}
-										src='/assets/remove_btn.svg'
-										width='25'
-										height='25'
-										alt=''
-									/>
-								</div>
+								<RemoveIngredientMealItem
+									ingredient={ingredient}
+									selectedIngredients={selectedIngredients}
+									removeIngredient={removeIngredient}
+								/>
 							);
 						} else {
 							// If the ingredient is NOT in the selected list, you want to show the add component
 							return (
-								<div className={styles.list_item} key={ingredient._id}>
-									{ingredient.name}, &nbsp;{ingredient.qty}
-									&nbsp;{ingredient.unit}
-									<img
-										onClick={(e) => addIngredient(ingredient)}
-										className={styles.btn}
-										src='/assets/add_btn.svg'
-										width='25'
-										height='25'
-										alt=''
-									/>
-								</div>
+								<AddIngredientMealItem
+									ingredient={ingredient}
+									addIngredient={addIngredient}
+								/>
 							);
 						}
 					})}
