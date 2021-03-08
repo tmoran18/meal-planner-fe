@@ -17,13 +17,24 @@ const Ingredients = () => {
 						name='viewport'
 						content='width=device-width, initial-scale=1.0'></meta>
 				</Head>
-				<div>
-					Ingredients
-					{console.log(typeof ingredients)}
+				<div className='ingredient_container'>
+					<h2
+						style={{
+							color: '#828ea6',
+							textAlign: 'center',
+							marginBottom: '30px',
+							fontWeight: 500,
+						}}>
+						Ingredients
+					</h2>
 					<IngredientList ingredients={ingredients} />
 				</div>
 			</Layout>
-			<style jsx>{``}</style>
+			<style jsx>{`
+				.ingredient_container {
+					margin: 100px auto;
+				}
+			`}</style>
 		</>
 	);
 };
