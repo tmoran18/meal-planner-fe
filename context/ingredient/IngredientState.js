@@ -32,6 +32,10 @@ const IngredientState = (props) => {
 
 	// Delete Meal
 
+	const deleteIngredient = (id) => {
+		dispatch({ type: DELETE_INGREDIENT, payload: id });
+	};
+
 	// Update Meal
 
 	return (
@@ -39,6 +43,7 @@ const IngredientState = (props) => {
 			value={{
 				ingredients: state.ingredients,
 				addIngredient,
+				deleteIngredient,
 			}}>
 			{props.children}
 		</IngredientContext.Provider>
