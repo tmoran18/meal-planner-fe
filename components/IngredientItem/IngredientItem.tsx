@@ -17,7 +17,7 @@ const IngredientItem: React.FC<Props> = ({ name, unit, index, id }) => {
 		}
 	};
 
-	const deleteIngredient = (id: number) => {
+	const deleteIngredient = () => {
 		alert(id);
 	};
 
@@ -31,7 +31,7 @@ const IngredientItem: React.FC<Props> = ({ name, unit, index, id }) => {
 			<p style={{ minWidth: '100px', textAlign: 'left' }}>{unit}</p>
 			<div>
 				<svg
-					onClick={() => deleteIngredient(id)}
+					onClick={deleteIngredient}
 					className={styles.icon}
 					xmlns='http://www.w3.org/2000/svg'
 					width='16'
