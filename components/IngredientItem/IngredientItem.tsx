@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import styles from './ingredientitem.module.css';
+import IngredientContext from '../../context/ingredient/ingredientContext';
+import ingredientContext from '../../context/ingredient/ingredientContext';
 
 interface Props {
 	name: string;
@@ -8,6 +11,8 @@ interface Props {
 }
 
 const IngredientItem: React.FC<Props> = ({ name, unit, index, id }) => {
+	const ingredientContext = useContext(IngredientContext);
+
 	const itemColorStyle = () => {
 		// if the index is even make this color
 		if (index % 2 === 0) {
@@ -18,7 +23,7 @@ const IngredientItem: React.FC<Props> = ({ name, unit, index, id }) => {
 	};
 
 	const deleteIngredient = () => {
-		alert(id);
+		ingredientContext.deleteIngredient(id);
 	};
 
 	const editIngredient = (id: number) => {
