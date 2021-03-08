@@ -8,7 +8,7 @@ const IngredientState = (props) => {
 	const intialState = {
 		ingredients: [
 			{
-				_id: '1',
+				_id: '11',
 				name: 'Potatoes',
 				unit: '',
 				qty: '6',
