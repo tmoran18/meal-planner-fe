@@ -10,6 +10,7 @@ const DropDownList = ({
 	selectedIngredients,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [searchTerm, setSearchTerm] = useState('');
 	const dropDownRef = useRef();
 
 	// Close the Ingredients dropdown list when click outside div
@@ -39,39 +40,49 @@ const DropDownList = ({
 				className={styles.input}
 				// Toggle setIsOpen
 				onClick={() => setIsOpen((isOpen) => !isOpen)}
+				onChange={(e) => setSearchTerm(e.target.value)}
 			/>
 			{/* TODO add Framer motion animation to dropdown */}
 			{/* If isOpen is true, show dropdown */}
 			{isOpen && (
 				<div>
-					{/* TODO Clean all this up to make more readable  */}
 					{/* // Map over the ingredients */}
-					{ingredients.map((ingredient) => {
-						// Check if there is already ingredients in the selected ingredient list
-						if (
-							selectedIngredients.some(
-								(selectedIngredient) =>
-									selectedIngredient._id === ingredient._id,
-							)
-						) {
-							// If the ingredient is already in the selected list, you want to show the remove component
-							return (
-								<RemoveIngredientMealItem
-									ingredient={ingredient}
-									selectedIngredients={selectedIngredients}
-									removeIngredient={removeIngredient}
-								/>
-							);
-						} else {
-							// If the ingredient is NOT in the selected list, you want to show the add component
-							return (
-								<AddIngredientMealItem
-									ingredient={ingredient}
-									addIngredient={addIngredient}
-								/>
-							);
-						}
-					})}
+					{ingredients
+						.filter((ingredient) => {
+							if (searchTerm === '') {
+								return ingredient;
+							} else if (
+								ingredient.name.toLowerCase().includes(searchTerm.toLowerCase())
+							) {
+								return ingredient;
+							}
+						})
+						.map((ingredient) => {
+							// Check if there is already ingredients in the selected ingredient list
+							if (
+								selectedIngredients.some(
+									(selectedIngredient) =>
+										selectedIngredient._id === ingredient._id,
+								)
+							) {
+								// If the ingredient is already in the selected list, you want to show the remove component
+								return (
+									<RemoveIngredientMealItem
+										ingredient={ingredient}
+										selectedIngredients={selectedIngredients}
+										removeIngredient={removeIngredient}
+									/>
+								);
+							} else {
+								// If the ingredient is NOT in the selected list, you want to show the add component
+								return (
+									<AddIngredientMealItem
+										ingredient={ingredient}
+										addIngredient={addIngredient}
+									/>
+								);
+							}
+						})}
 				</div>
 			)}
 			{selectedIngredients.length > 0 && (
