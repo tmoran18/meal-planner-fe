@@ -4,6 +4,7 @@ import Axios from 'axios';
 import styles from './createmealform.module.css';
 import DropDownList from '../DropDownList/DropDownList';
 import MealContext from '../../context/meal/mealContext';
+import IngredientContext from '../../context/ingredient/ingredientContext';
 
 const CreateMealForm = () => {
 	const [imageSelected, setImageSelected] = useState('');
@@ -11,21 +12,11 @@ const CreateMealForm = () => {
 	const imageFileInput = useRef();
 
 	const mealContext = useContext(MealContext);
+	const ingredientContext = useContext(IngredientContext);
 
-	const ingredients = [
-		{
-			_id: '1',
-			name: 'Potatoes',
-			unit: '',
-			qty: '6',
-			category: 'Fruit & Veggies',
-		},
-		{ _id: '2', name: 'Chicken', unit: '', qty: '2', category: 'Meat' },
-		{ _id: '3', name: 'Soy Sauce', unit: 'tbs', qty: '2', category: 'Sauce' },
-		{ _id: '4', name: 'Milk', unit: 'cup', qty: '3', category: 'Dairy' },
-		{ _id: '5', name: 'Cheese', unit: 'cup', qty: '2', category: 'Dairy' },
-	];
+	const { ingredients } = ingredientContext;
 
+	// Remove Ingredient from a MEAL
 	const removeIngredient = (ingredientsSelected, ingredient) => {
 		const newIngredientsSelected = ingredientsSelected.filter(
 			(ingredientSelected) => ingredientSelected._id !== ingredient._id,
@@ -33,6 +24,7 @@ const CreateMealForm = () => {
 		setIngredientsSelected(newIngredientsSelected);
 	};
 
+	// Add Ingredient to a MEAL
 	const addIngredient = (ingredient) => {
 		if (ingredientsSelected.length < 1) {
 			setIngredientsSelected([...ingredientsSelected, ingredient]);
