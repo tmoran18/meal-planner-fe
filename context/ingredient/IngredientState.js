@@ -2,24 +2,31 @@ import { useReducer } from 'react';
 import { v4 as uuid } from 'uuid';
 import IngredientContext from './ingredientContext';
 import ingredientReducer from './ingredientReducer';
-import { ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../types';
+import {
+	ADD_INGREDIENT,
+	DELETE_INGREDIENT,
+	SET_CURRENT_INGREDIENT,
+	CLEAR_CURRENT_INGREDIENT,
+	UPDATE_INGREDIENT,
+} from '../types';
 
 const IngredientState = (props) => {
 	const intialState = {
 		ingredients: [
 			{
-				_id: '11',
+				_id: '1',
 				name: 'Potatoes',
 				unit: '',
-				qty: '6',
+				qty: 0,
 				category: 'Fruit & Veggies',
 			},
-			{ _id: '2', name: 'Chicken', unit: '', qty: '2', category: 'Meat' },
-			{ _id: '3', name: 'Soy Sauce', unit: 'tbs', qty: '2', category: 'Sauce' },
-			{ _id: '4', name: 'Milk', unit: 'cup', qty: '3', category: 'Dairy' },
-			{ _id: '5', name: 'Cheese', unit: 'cup', qty: '2', category: 'Dairy' },
-			{ _id: '6', name: 'Food', unit: 'cup', qty: '2', category: 'Dairy' },
+			{ _id: '2', name: 'Chicken', unit: '', qty: 0, category: 'Meat' },
+			{ _id: '3', name: 'Soy Sauce', unit: 'tbs', qty: 0, category: 'Sauce' },
+			{ _id: '4', name: 'Milk', unit: 'cup', qty: 0, category: 'Dairy' },
+			{ _id: '5', name: 'Cheese', unit: 'cup', qty: 0, category: 'Dairy' },
+			{ _id: '6', name: 'Food', unit: 'cup', qty: 0, category: 'Dairy' },
 		],
+		current: null,
 	};
 
 	const [state, dispatch] = useReducer(ingredientReducer, intialState);
@@ -30,20 +37,30 @@ const IngredientState = (props) => {
 		dispatch({ type: ADD_INGREDIENT, payload: ingredient });
 	};
 
-	// Delete Meal
-
+	// Delete Ingredient
 	const deleteIngredient = (id) => {
 		dispatch({ type: DELETE_INGREDIENT, payload: id });
 	};
 
-	// Update Meal
+	// Set current Ingredient
+	const setCurrentIngredient = (ingredient) => {
+		dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
+	};
+
+	// Clear Current Ingredient
+	const clearCurrentIngredient = () => {
+		dispatch({ type: CLEAR_CURRENT_INGREDIENT });
+	};
 
 	return (
 		<IngredientContext.Provider
 			value={{
 				ingredients: state.ingredients,
+				current: state.current,
 				addIngredient,
 				deleteIngredient,
+				setCurrentIngredient,
+				clearCurrentIngredient,
 			}}>
 			{props.children}
 		</IngredientContext.Provider>

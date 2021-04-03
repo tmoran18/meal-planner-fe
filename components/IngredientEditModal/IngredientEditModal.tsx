@@ -1,15 +1,20 @@
-import { useContext } from 'react';
+import styles from './ingredienteditmodal.module.css';
 import { Formik, Field, Form } from 'formik';
-import styles from './createingredientform.module.css';
-import IngredientContext from '../../context/ingredient/ingredientContext';
 
-const CreateIngredientForm = () => {
-	const ingredientContext = useContext(IngredientContext);
+interface Iprops {
+	_id: string | number;
+	name: string;
+	unit?: string;
+	category?: string;
+	qty?: string | number;
+}
 
-	const submit = (values) => {
-		ingredientContext.addIngredient(values);
-	};
-
+const IngredientEditModal: React.FC<Iprops> = ({
+	name,
+	unit,
+	category,
+	qty,
+}) => {
 	return (
 		<div className={styles.form_container}>
 			<h1
@@ -19,18 +24,18 @@ const CreateIngredientForm = () => {
 					marginBottom: '50px',
 					fontWeight: '500',
 				}}>
-				Create an Ingredient
+				Update an Ingredient
 			</h1>
 			<Formik
 				initialValues={{
-					name: '',
-					unit: '',
-					qty: '',
-					category: '',
+					name,
+					unit,
+					qty,
+					category,
 				}}
 				onSubmit={(values, { resetForm, setSubmitting }) => {
 					// Submit the data
-					submit(values);
+					//submit(values);
 					resetForm();
 					setSubmitting(false);
 				}}>
@@ -94,7 +99,7 @@ const CreateIngredientForm = () => {
 					</div>
 
 					<button className={styles.submit_btn} type='submit'>
-						Create Ingredient
+						Update Ingredient
 					</button>
 				</Form>
 			</Formik>
@@ -102,4 +107,4 @@ const CreateIngredientForm = () => {
 	);
 };
 
-export default CreateIngredientForm;
+export default IngredientEditModal;

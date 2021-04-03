@@ -8,6 +8,7 @@ interface Props {
 		name: string;
 		unit?: string;
 		_id: number;
+		qty?: string;
 	}[];
 }
 
@@ -44,12 +45,7 @@ const IngredientList: React.FC<Props> = ({ ingredients }) => {
 					}
 				})
 				.map((ingredient, index: number) => (
-					<IngredientItem
-						name={ingredient.name}
-						index={index}
-						unit={ingredient.unit}
-						id={ingredient._id}
-					/>
+					<IngredientItem index={index} ingredient={ingredient} />
 				))}
 		</div>
 	);

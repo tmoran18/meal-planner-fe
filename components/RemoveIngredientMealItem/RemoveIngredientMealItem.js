@@ -5,14 +5,13 @@ const RemoveIngredientMealItem = ({
 	selectedIngredients,
 	removeIngredient,
 }) => {
-	const { name, qty, unit, _id } = ingredient;
+	const { name, _id } = ingredient;
 
 	return (
 		<div className={styles.selected_list_item} key={_id}>
-			{name}, &nbsp;{qty}
-			&nbsp;{unit}
+			{name}
 			<img
-				onClick={(e) => removeIngredient(selectedIngredients, ingredient)}
+				onClick={() => removeIngredient(selectedIngredients, ingredient)}
 				className={styles.btn}
 				src='/assets/remove_btn.svg'
 				width='20'
