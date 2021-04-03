@@ -52,6 +52,11 @@ const IngredientState = (props) => {
 		dispatch({ type: CLEAR_CURRENT_INGREDIENT });
 	};
 
+	// Update Current Ingredient
+	const updateIngredient = () => {
+		dispatch({ type: UPDATE_INGREDIENT });
+	};
+
 	return (
 		<IngredientContext.Provider
 			value={{

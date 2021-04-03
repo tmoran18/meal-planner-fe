@@ -6,8 +6,8 @@ import { Formik, Field, Form } from 'formik';
 
 const EditIngredient = () => {
 	const ingredientContext = useContext(IngredientContext);
-	const { name, unit, qty, category } = ingredientContext.current ?? {};
-
+	const { name, unit, category } = ingredientContext.current ?? {};
+	const { updateIngredient } = ingredientContext;
 	return (
 		<>
 			<Layout>
@@ -33,7 +33,7 @@ const EditIngredient = () => {
 								color: '#828ea6',
 								textAlign: 'center',
 								marginBottom: '50px',
-								fontWeight: '500',
+								fontWeight: 500,
 							}}>
 							Update an Ingredient
 						</h1>
@@ -41,12 +41,11 @@ const EditIngredient = () => {
 							initialValues={{
 								name,
 								unit,
-								qty,
 								category,
 							}}
 							onSubmit={(values, { resetForm, setSubmitting }) => {
 								// Submit the data
-								//submit(values);
+								updateIngredient();
 								resetForm();
 								setSubmitting(false);
 							}}>
@@ -60,17 +59,11 @@ const EditIngredient = () => {
 									Unit
 								</label>
 								<Field className='input' id='unit' name='unit' />
-
-								<label className='label' htmlFor='qty'>
-									Qty *
-								</label>
-								<Field className='input' id='qty' name='qty' required />
-
 								<div
 									id='my-radio-group'
 									style={{
 										color: '#828ea6',
-										fontWeight: '500',
+										fontWeight: 500,
 										fontSize: '14px',
 									}}>
 									Category
