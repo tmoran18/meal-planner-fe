@@ -17,7 +17,10 @@ const Index = () => {
 				</Head>
 				<div>
 					{mealContext.meals.map((meal) => (
-						<MealCard {...meal} />
+						<div>
+							<MealCard {...meal} />
+							<p>{JSON.stringify(meal.ingredients)}</p>
+						</div>
 					))}
 				</div>
 			</Layout>

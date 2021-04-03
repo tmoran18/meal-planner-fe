@@ -1,14 +1,31 @@
+import { useState } from 'react';
 import styles from './addingredientmeal.module.css';
 
+// addIngredient -> DropDownList
 const AddIngredientMealItem = ({ ingredient, addIngredient }) => {
-	const { name, qty, unit, _id } = ingredient;
+	const { name, unit, _id } = ingredient;
+	const [ingredientQty, setIngedientQty] = useState(0);
+
+	const updateIngredientQty = (ingredient) => {
+		const updatedIngredient = { ...ingredient, qty: ingredientQty };
+		addIngredient(updatedIngredient);
+	};
 
 	return (
 		<div className={styles.list_item} key={_id}>
-			{name}, &nbsp;{qty}
-			&nbsp;{unit}
+			{unit ? `${name}, ${unit}` : name}
+			<input
+				type='number'
+				value={ingredientQty}
+				onChange={(e) => setIngedientQty(e.target.value)}
+				name=''
+				id=''
+			/>
 			<img
-				onClick={() => addIngredient(ingredient)}
+				onClick={() =>
+					// addIngredient(ingredient, (ingredient.qty = ingredientQty))
+					updateIngredientQty(ingredient)
+				}
 				className={styles.btn}
 				src='/assets/add_btn.svg'
 				width='20'

@@ -18,7 +18,7 @@ const SignedInLinks = () => {
 					<Link href='/create-ingredient'>
 						<a className={styles.link}>Create Ingredient</a>
 					</Link>
-					<Link href='/'>
+					<Link href='/shopping-list'>
 						<a className={styles.link}>Shopping List</a>
 					</Link>
 				</ul>

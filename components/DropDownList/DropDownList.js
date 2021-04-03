@@ -3,6 +3,7 @@ import styles from './dropdownlist.module.css';
 import AddIngredientMealItem from '../AddIngredientMealItem/AddIngredientMealItem';
 import RemoveIngredientMealItem from '../RemoveIngredientMealItem/RemoveIngredientMealItem';
 
+// addIngredient ->
 const DropDownList = ({
 	ingredients,
 	addIngredient,
