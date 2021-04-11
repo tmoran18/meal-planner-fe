@@ -1,0 +1,8 @@
+.sidenav {
+  width: 300px;
+  background: var(--l_grey);
+  border-right: 2px solid var(--border);
+  position: fixed;
+  bottom: 0;
+  top: 80px;
+}

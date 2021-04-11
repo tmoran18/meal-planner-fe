@@ -1,0 +1,8 @@
+.alert {
+  background: tomato;
+  color: white;
+  font-weight: bold;
+  margin-top: 80px;
+  margin-left: 300px;
+  padding: 10px;
+}

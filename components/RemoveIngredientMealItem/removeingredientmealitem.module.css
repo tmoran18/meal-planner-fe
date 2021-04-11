@@ -1,9 +1,0 @@
-.selected_list_item {
-	padding: 10px;
-	border: 1px solid var(--border);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background: var(--green_selected);
-	box-shadow: 7px 1px 15px -6px rgba(0, 0, 0, 0.15);
-}
