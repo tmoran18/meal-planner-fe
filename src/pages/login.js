@@ -1,8 +1,32 @@
+import AlertContext from '../context/alert/alertContext'
+import AuthContext from '../context/auth/authContext'
 import { Formik, Field, Form } from 'formik'
+import { useContext, useEffect } from 'react'
 
-const Login = () => {
+const Login = (props) => {
+  const alertContext = useContext(AlertContext)
+  const authContext = useContext(AuthContext)
+
+  const { setAlert } = alertContext
+  const { login, error, clearErrors, isAuthenicated } = authContext
+
+  useEffect(() => {
+    if (isAuthenicated) {
+      props.history.push('/')
+    }
+
+    if (error === 'Invalid credentials' || error === 'Invalid Credentials') {
+      setAlert(error)
+      clearErrors()
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenicated, props.history])
+
   const loginSubmit = (values) => {
-    console.log(values)
+    login({
+      email: values.email,
+      password: values.password,
+    })
   }
   return (
     <>
@@ -23,13 +47,19 @@ const Login = () => {
           <label className='label' htmlFor='email'>
             Email *
           </label>
-          <Field className='input' id='email' name='email' />
+          <Field className='input' id='email' name='email' required />
 
           <label className='label' htmlFor='password'>
             Password *
           </label>
 
-          <Field className='input' id='password2' name='password2' required />
+          <Field
+            className='input'
+            type='password'
+            id='password'
+            name='password'
+            required
+          />
           <button type='submit' className='submit_btn'>
             Sign In
           </button>

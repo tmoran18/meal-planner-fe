@@ -5,9 +5,12 @@ import setAuthToken from '../../utils/setAuthToken'
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
   CLEAR_ERRORS,
   USER_LOADED,
   AUTH_ERROR,
+  LOGOUT,
 } from '../types'
 import axios from 'axios'
 
@@ -40,6 +43,30 @@ const AuthState = (props) => {
         payload: error.response.data.msg,
       })
     }
+  }
+
+  // login User
+  const login = async (formData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await axios.post('/api/auth', formData, config)
+      // The payload will be a JWT Token
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data })
+      loadUser()
+    } catch (error) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: error.response.data.msg,
+      })
+    }
+  }
+
+  const logout = () => {
+    dispatch({ type: LOGOUT })
   }
 
   const loadUser = async () => {
@@ -76,6 +103,8 @@ const AuthState = (props) => {
         register,
         clearErrors,
         loadUser,
+        login,
+        logout,
       }}
     >
       {props.children}
