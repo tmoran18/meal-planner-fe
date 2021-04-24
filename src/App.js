@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import AuthState from './context/auth/AuthState'
 import MealState from './context/meal/MealState'
@@ -6,6 +7,7 @@ import AlertState from './context/alert/AlertState'
 import Layout from './components/Layout/Layout'
 import setAuthToken from './utils/setAuthToken'
 
+import PrivateRoute from './components/routing/PrivateRoute'
 import Meals from './pages/meals'
 import CreateIngredient from './pages/create-ingredient'
 import CreateMeal from './pages/create-meal'
@@ -29,7 +31,7 @@ const App = () => {
               <div>
                 <Switch>
                   <Layout>
-                    <Route exact path='/' component={Meals} />
+                    <PrivateRoute exact path='/' component={Meals} />
                     <Route
                       exact
                       path='/create-ingredient'

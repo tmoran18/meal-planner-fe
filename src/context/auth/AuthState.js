@@ -65,6 +65,7 @@ const AuthState = (props) => {
     }
   }
 
+  // Logout user
   const logout = () => {
     dispatch({ type: LOGOUT })
   }
