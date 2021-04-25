@@ -1,8 +1,9 @@
 import { useReducer } from 'react'
 import { v4 as uuid } from 'uuid'
+import Axios from 'axios'
 import MealContext from './mealContext'
 import mealReducer from './mealReducer'
-import { ADD_MEAL, DELETE_MEAL, UPDATE_MEAL } from '../types'
+import { ADD_MEAL, DELETE_MEAL, UPDATE_MEAL, SET_CURRENT_MEAL } from '../types'
 
 const MealState = (props) => {
   const intialState = {
@@ -37,9 +38,14 @@ const MealState = (props) => {
   }
 
   // Delete Meal
-
+  const deleteMeal = (meal) => {
+    meal._id = uuid()
+    dispatch({ type: DELETE_MEAL, payload: meal })
+  }
   // Update Meal
-
+  const setCurrentMeal = (meal) => {
+    dispatch({ type: SET_CURRENT_MEAL, payload: meal })
+  }
   return (
     <MealContext.Provider
       value={{

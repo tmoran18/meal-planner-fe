@@ -2,11 +2,17 @@ import { useContext } from 'react'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
+import { useHistory } from 'react-router-dom'
 
 const SignedInLinks = () => {
   const authContext = useContext(AuthContext)
-
+  let history = useHistory()
   const { logout } = authContext
+
+  const onSignout = () => {
+    logout()
+    history.push('/login')
+  }
 
   return (
     <>
@@ -19,7 +25,7 @@ const SignedInLinks = () => {
           <Link to='/shopping-list'>Shopping List</Link>
         </ul>
         <ul className={styles.menu}>
-          <Link onClick={logout}>Sign Out</Link>
+          <button onClick={onSignout}>Sign Out</button>
         </ul>
       </div>
     </>

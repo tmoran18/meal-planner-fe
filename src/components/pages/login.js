@@ -1,7 +1,8 @@
-import AlertContext from '../context/alert/alertContext'
-import AuthContext from '../context/auth/authContext'
+import AlertContext from '../../context/alert/alertContext'
+import AuthContext from '../../context/auth/authContext'
 import { Formik, Field, Form } from 'formik'
 import { useContext, useEffect } from 'react'
+import Layout from '../Layout/Layout'
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext)
@@ -29,7 +30,7 @@ const Login = (props) => {
     })
   }
   return (
-    <>
+    <Layout>
       <Formik
         initialValues={{
           email: '',
@@ -65,7 +66,7 @@ const Login = (props) => {
           </button>
         </Form>
       </Formik>
-    </>
+    </Layout>
   )
 }
 

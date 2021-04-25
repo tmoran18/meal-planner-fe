@@ -7,11 +7,17 @@ import AuthContext from '../../context/auth/authContext'
 const SideNav = () => {
   const authContext = useContext(AuthContext)
 
-  const { isAuthenicated } = authContext
+  const { isAuthenicated, loading, token } = authContext
 
   return (
     <nav className={styles.sidenav}>
-      {isAuthenicated ? <SignedInLinks /> : <SignedOutLinks />}
+      {loading && token ? (
+        <></>
+      ) : isAuthenicated ? (
+        <SignedInLinks />
+      ) : (
+        <SignedOutLinks />
+      )}
     </nav>
   )
 }

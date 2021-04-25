@@ -1,16 +1,24 @@
-import { useContext } from 'react'
-import IngredientContext from '../context/ingredient/ingredientContext'
+import { useContext, useEffect } from 'react'
+import AuthContext from '../../context/auth/authContext'
+import IngredientContext from '../../context/ingredient/ingredientContext'
 import { Formik, Field, Form } from 'formik'
 import { useHistory } from 'react-router-dom'
+import Layout from '../Layout/Layout'
 
 const EditIngredient = () => {
   const ingredientContext = useContext(IngredientContext)
+  const authContext = useContext(AuthContext)
   const { _id, qty, name, unit, category } = ingredientContext.current ?? {}
   const { updateIngredient, clearCurrentIngredient } = ingredientContext
   let history = useHistory()
 
+  useEffect(() => {
+    authContext.loadUser()
+    //eslint-disable-next-line
+  }, [])
+
   return (
-    <>
+    <Layout>
       <div className='ingredient_container'>
         <h2
           style={{
@@ -116,7 +124,7 @@ const EditIngredient = () => {
           </Formik>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

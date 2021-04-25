@@ -1,9 +1,10 @@
-import AlertContext from '../context/alert/alertContext'
-import AuthContext from '../context/auth/authContext'
+import AlertContext from '../../context/alert/alertContext'
+import AuthContext from '../../context/auth/authContext'
 import { Formik, Field, Form } from 'formik'
 import { useContext, useEffect } from 'react'
+import Layout from '../Layout/Layout'
 
-import '../styles/form.css'
+import '../../styles/form.css'
 
 const Register = (props) => {
   const alertContext = useContext(AlertContext)
@@ -36,7 +37,7 @@ const Register = (props) => {
     }
   }
   return (
-    <>
+    <Layout>
       <Formik
         initialValues={{
           name: '',
@@ -97,7 +98,7 @@ const Register = (props) => {
           </button>
         </Form>
       </Formik>
-    </>
+    </Layout>
   )
 }
 

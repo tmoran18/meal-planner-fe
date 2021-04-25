@@ -12,8 +12,15 @@
   padding: 25px 0 0 25px;
 }
 
-.link {
+.link,
+button {
   text-decoration: none;
   margin-bottom: 20px;
   font-size: 15px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
