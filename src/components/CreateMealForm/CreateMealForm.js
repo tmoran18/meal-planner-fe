@@ -1,10 +1,11 @@
 import { useState, useRef, useContext } from 'react'
 import { Formik, Field, Form } from 'formik'
-import Axios from 'axios'
+import axios from 'axios'
 import styles from './index.module.css'
 import DropDownList from '../DropDownList/DropDownList'
 import MealContext from '../../context/meal/mealContext'
 import IngredientContext from '../../context/ingredient/ingredientContext'
+import AuthContext from '../../context/auth/authContext'
 
 const CreateMealForm = () => {
   const [imageSelected, setImageSelected] = useState('')
@@ -13,8 +14,10 @@ const CreateMealForm = () => {
 
   const mealContext = useContext(MealContext)
   const ingredientContext = useContext(IngredientContext)
+  const authContext = useContext(AuthContext)
 
   const { ingredients } = ingredientContext
+  const { token } = authContext
 
   // Remove Ingredient from a MEAL
   const removeIngredient = (ingredientsSelected, ingredient) => {
@@ -46,7 +49,8 @@ const CreateMealForm = () => {
     formData.append('upload_preset', 'gznohnsu')
 
     try {
-      const response = await Axios.post(
+      delete axios.defaults.headers.common['x-auth-token']
+      const response = await axios.post(
         'https://api.cloudinary.com/v1_1/dsjhcek2q/image/upload',
         formData
       )
@@ -59,6 +63,7 @@ const CreateMealForm = () => {
 
   const submitMealData = async (values) => {
     const imageURL = await uploadImage(imageSelected)
+    axios.defaults.headers.common['x-auth-token'] = token
     if (imageURL) {
       values.image_URL = imageURL
       values.ingredients = ingredientsSelected

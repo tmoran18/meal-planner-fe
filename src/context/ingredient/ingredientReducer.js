@@ -4,6 +4,7 @@ import {
   SET_CURRENT_INGREDIENT,
   CLEAR_CURRENT_INGREDIENT,
   UPDATE_INGREDIENT,
+  INGREDIENT_ERROR,
 } from '../types'
 
 const ingredientReducer = (state, action) => {
@@ -34,6 +35,11 @@ const ingredientReducer = (state, action) => {
       }
     case CLEAR_CURRENT_INGREDIENT:
       return { ...state, current: null }
+    case INGREDIENT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
     default:
       return state
   }

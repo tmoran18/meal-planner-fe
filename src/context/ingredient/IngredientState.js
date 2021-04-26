@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { v4 as uuid } from 'uuid'
+import axios from 'axios'
 import IngredientContext from './ingredientContext'
 import ingredientReducer from './ingredientReducer'
 import {
@@ -8,33 +8,34 @@ import {
   SET_CURRENT_INGREDIENT,
   CLEAR_CURRENT_INGREDIENT,
   UPDATE_INGREDIENT,
+  INGREDIENT_ERROR,
 } from '../types'
 
 const IngredientState = (props) => {
   const intialState = {
-    ingredients: [
-      {
-        _id: '1',
-        name: 'Potatoes',
-        unit: '',
-        qty: 0,
-        category: 'Fruit & Veggies',
-      },
-      { _id: '2', name: 'Chicken', unit: '', qty: 0, category: 'Meat' },
-      { _id: '3', name: 'Soy Sauce', unit: 'tbs', qty: 0, category: 'Sauce' },
-      { _id: '4', name: 'Milk', unit: 'cup', qty: 0, category: 'Dairy' },
-      { _id: '5', name: 'Cheese', unit: 'cup', qty: 0, category: 'Dairy' },
-      { _id: '6', name: 'Food', unit: 'cup', qty: 0, category: 'Dairy' },
-    ],
+    ingredients: [],
     current: null,
+    error: null,
   }
 
   const [state, dispatch] = useReducer(ingredientReducer, intialState)
 
   // Add Ingredient
-  const addIngredient = (ingredient) => {
-    ingredient.id = uuid()
-    dispatch({ type: ADD_INGREDIENT, payload: ingredient })
+  const addIngredient = async (ingredient) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await axios.post('/api/ingredients', ingredient, config)
+      dispatch({ type: ADD_INGREDIENT, payload: res.data })
+    } catch (error) {
+      dispatch({
+        type: INGREDIENT_ERROR,
+        payload: error.response.msg,
+      })
+    }
   }
 
   // Delete Ingredient
@@ -62,6 +63,7 @@ const IngredientState = (props) => {
       value={{
         ingredients: state.ingredients,
         current: state.current,
+        error: state.error,
         addIngredient,
         deleteIngredient,
         setCurrentIngredient,

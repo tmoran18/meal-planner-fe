@@ -47,11 +47,6 @@ const CreateIngredientForm = () => {
           </label>
           <Field className={styles.input} id='unit' name='unit' />
 
-          <label className={styles.label} htmlFor='qty'>
-            Qty *
-          </label>
-          <Field className={styles.input} id='qty' name='qty' required />
-
           <div
             id='my-radio-group'
             style={{ color: '#828ea6', fontWeight: '500', fontSize: '14px' }}

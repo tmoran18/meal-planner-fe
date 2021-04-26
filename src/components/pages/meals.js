@@ -16,14 +16,18 @@ const Meals = () => {
   return (
     <Layout>
       <div>
-        {mealContext.meals.map((meal) => (
-          <div>
-            <MealCard {...meal} />
+        {mealContext.meals.length === 0 ? (
+          <div>Please create your first meal</div>
+        ) : (
+          mealContext.meals.map((meal) => (
+            <div>
+              <MealCard {...meal} />
 
-            <p>{JSON.stringify(meal.ingredients)}</p>
-            <p>Meals</p>
-          </div>
-        ))}
+              <p>{JSON.stringify(meal.ingredients)}</p>
+              <p>Meals</p>
+            </div>
+          ))
+        )}
       </div>
     </Layout>
   )
