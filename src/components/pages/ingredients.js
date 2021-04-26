@@ -7,12 +7,18 @@ import Layout from '../Layout/Layout'
 const Ingredients = () => {
   const ingredientContext = useContext(IngredientContext)
   const authContext = useContext(AuthContext)
-  const ingredients = ingredientContext.ingredients
+  const { ingredients, getIngredients, loading } = ingredientContext
 
   useEffect(() => {
     authContext.loadUser()
     //eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    getIngredients()
+    //eslint-disable-next-line
+  }, [])
+
   return (
     <Layout>
       <div className='ingredient_container'>
@@ -26,7 +32,15 @@ const Ingredients = () => {
         >
           Ingredients
         </h2>
-        <IngredientList ingredients={ingredients} />
+        {/* If no ingredients */}
+        {ingredients !== null && ingredients.length === 0 && !loading ? (
+          <h4>Please add your first ingredients</h4>
+        ) : // There are Ingredients
+        ingredients !== null && !loading ? (
+          <IngredientList ingredients={ingredients} />
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     </Layout>
   )

@@ -2,15 +2,20 @@ import { useContext } from 'react'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
+import MealContext from '../../context/meal/mealContext'
 import { useHistory } from 'react-router-dom'
 
 const SignedInLinks = () => {
   const authContext = useContext(AuthContext)
-  let history = useHistory()
+  const mealContext = useContext(MealContext)
   const { logout } = authContext
+  const { clearMeals } = mealContext
+
+  let history = useHistory()
 
   const onSignout = () => {
     logout()
+    clearMeals()
     history.push('/login')
   }
 

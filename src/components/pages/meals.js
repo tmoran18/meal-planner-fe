@@ -8,27 +8,30 @@ const Meals = () => {
   const mealContext = useContext(MealContext)
   const authContext = useContext(AuthContext)
 
+  const { meals, getMeals, loading } = mealContext
+
   useEffect(() => {
     authContext.loadUser()
     //eslint-disable-next-line
   }, [])
 
+  useEffect(() => {
+    getMeals()
+    //eslint-disable-next-line
+  }, [])
+
   return (
     <Layout>
-      <div>
-        {mealContext.meals.length === 0 ? (
-          <div>Please create your first meal</div>
-        ) : (
-          mealContext.meals.map((meal) => (
-            <div>
-              <MealCard {...meal} />
-
-              <p>{JSON.stringify(meal.ingredients)}</p>
-              <p>Meals</p>
-            </div>
-          ))
-        )}
-      </div>
+      {/* If no meals */}
+      {meals !== null && meals.length === 0 && !loading ? (
+        <h4>Please add a meal</h4>
+      ) : // There are Meals
+      meals !== null && !loading ? (
+        meals.map((meal) => <MealCard key={meal._id} {...meal} />)
+      ) : (
+        // Loading State
+        <div>Loading...</div>
+      )}
     </Layout>
   )
 }
