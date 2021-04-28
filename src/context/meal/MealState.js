@@ -24,9 +24,16 @@ const MealState = (props) => {
 
   // Get Meals
   const getMeals = async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
     try {
       const res = await axios.get(
-        'https://meal-planner-now.herokuapp.com/api/meals'
+        'https://meal-planner-now.herokuapp.com/api/meals',
+        config
       )
       dispatch({
         type: GET_MEALS,
