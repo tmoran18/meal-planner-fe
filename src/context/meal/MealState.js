@@ -25,7 +25,9 @@ const MealState = (props) => {
   // Get Meals
   const getMeals = async () => {
     try {
-      const res = await axios.get('/api/meals')
+      const res = await axios.get(
+        'https://meal-planner-now.herokuapp.com/api/meals'
+      )
       dispatch({
         type: GET_MEALS,
         payload: res.data,
