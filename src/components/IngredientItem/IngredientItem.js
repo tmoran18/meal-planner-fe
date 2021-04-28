@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import styles from './index.module.css'
 import IngredientContext from '../../context/ingredient/ingredientContext'
 import { useHistory } from 'react-router-dom'
@@ -12,7 +12,7 @@ const IngredientItem = ({ ingredient, index }) => {
   } = ingredientContext
   let history = useHistory()
 
-  const { name, qty, category, _id, unit } = ingredient
+  const { name, _id, unit } = ingredient
 
   const itemColorStyle = () => {
     // if the index is even make this color

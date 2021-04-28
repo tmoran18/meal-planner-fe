@@ -57,8 +57,45 @@ const IngredientState = (props) => {
   }
 
   // Delete Ingredient
-  const deleteIngredient = (id) => {
+  const deleteIngredient = async (id) => {
+    try {
+      await axios.delete(`/api/ingredients/${id}`)
+      dispatch({
+        type: DELETE_INGREDIENT,
+        payload: id,
+      })
+    } catch (error) {
+      dispatch({
+        type: INGREDIENT_ERROR,
+        payload: error.response.msg,
+      })
+    }
     dispatch({ type: DELETE_INGREDIENT, payload: id })
+  }
+
+  // Update Current Ingredient
+  const updateIngredient = async (ingredient) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await axios.put(
+        `/api/ingredients/${ingredient._id}`,
+        ingredient,
+        config
+      )
+      dispatch({
+        type: UPDATE_INGREDIENT,
+        payload: res.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: INGREDIENT_ERROR,
+        payload: error.response.msg,
+      })
+    }
   }
 
   const clearIngredients = () => {
@@ -75,11 +112,6 @@ const IngredientState = (props) => {
   // Clear Current Ingredient
   const clearCurrentIngredient = () => {
     dispatch({ type: CLEAR_CURRENT_INGREDIENT })
-  }
-
-  // Update Current Ingredient
-  const updateIngredient = (ingredient) => {
-    dispatch({ type: UPDATE_INGREDIENT, payload: ingredient })
   }
 
   return (
