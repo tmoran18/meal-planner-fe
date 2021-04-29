@@ -1,12 +1,17 @@
-import styles from './index.module.css'
+import { Image } from '@chakra-ui/image'
+import { Box, Text } from '@chakra-ui/layout'
 
 const MealCard = ({ name, secondary_name, image_URL }) => {
   return (
-    <div className={styles.meal__card}>
-      <img src={image_URL} width='350' alt={`${name} with ${secondary_name}`} />
-      <h3 className={styles.meal__title}>{name}</h3>
-      <p className={styles.meal__sec_title}>{secondary_name}</p>
-    </div>
+    <Box m='20px' textAlign='center' boxShadow='lg' w='350px'>
+      <Image src={image_URL} alt={`${name} with ${secondary_name}`} />
+      <Box p='10px' color='gray.500'>
+        <Text fontSize='xl' fontWeight='500'>
+          {name}
+        </Text>
+        <Text fontWeight='300'>{`with ${secondary_name}`}</Text>
+      </Box>
+    </Box>
   )
 }
 

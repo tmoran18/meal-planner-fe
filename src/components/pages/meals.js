@@ -3,6 +3,7 @@ import MealContext from '../../context/meal/mealContext'
 import AuthContext from '../../context/auth/authContext'
 import MealCard from '../MealCard/MealCard'
 import Layout from '../Layout/Layout'
+import { Button, ButtonGroup } from '@chakra-ui/react'
 
 const Meals = () => {
   const mealContext = useContext(MealContext)
