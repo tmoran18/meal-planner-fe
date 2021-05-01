@@ -9,6 +9,7 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { useDisclosure } from '@chakra-ui/hooks'
 import Modal from '../Modal/Modal'
 import { Button } from '@chakra-ui/button'
+import EditIngredient from '../EditIngredient/EditIngredient'
 
 const IngredientItem = ({ ingredient, index }) => {
   const ingredientContext = useContext(IngredientContext)
@@ -57,8 +58,8 @@ const IngredientItem = ({ ingredient, index }) => {
           <DeleteIcon cursor='pointer' onClick={onDelete} />
         </Box>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
-        Modal
+      <Modal isOpen={isOpen} onClose={onClose} onOpen={onOpen} modalTitle='Edit Ingredient' modalButtonText='Update Ingredient'>
+        <EditIngredient />
       </Modal>
     </Box>
   )
