@@ -70,7 +70,6 @@ const IngredientState = (props) => {
         payload: error.response.msg,
       })
     }
-    dispatch({ type: DELETE_INGREDIENT, payload: id })
   }
 
   // Update Current Ingredient

@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef, useContext, useEffect } from 'react'
 import { Formik, Field, Form } from 'formik'
 import axios from 'axios'
 import styles from './index.module.css'
@@ -16,8 +16,13 @@ const CreateMealForm = () => {
   const ingredientContext = useContext(IngredientContext)
   const authContext = useContext(AuthContext)
 
-  const { ingredients } = ingredientContext
+  const { ingredients, getIngredients } = ingredientContext
   const { token } = authContext
+
+  useEffect(() => {
+    getIngredients()
+    //eslint-disable-next-line
+  }, [])
 
   // Remove Ingredient from a MEAL
   const removeIngredient = (ingredientsSelected, ingredient) => {
@@ -54,7 +59,7 @@ const CreateMealForm = () => {
         'https://api.cloudinary.com/v1_1/dsjhcek2q/image/upload',
         formData
       )
-      const data = await response.data.secure_url
+      const data = await response.data
       return data
     } catch (error) {
       console.error(error.message)
@@ -65,7 +70,8 @@ const CreateMealForm = () => {
     const imageURL = await uploadImage(imageSelected)
     axios.defaults.headers.common['x-auth-token'] = token
     if (imageURL) {
-      values.image_URL = imageURL
+      values.image_URL = imageURL.secure_url
+      values.imageID = imageURL.public_id
       values.ingredients = ingredientsSelected
       mealContext.addMeal(values)
     } else {

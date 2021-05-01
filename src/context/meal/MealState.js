@@ -66,14 +66,46 @@ const MealState = (props) => {
   }
 
   // Delete Meal
-  const deleteMeal = (meal) => {
-    dispatch({ type: DELETE_MEAL, payload: meal })
+  const deleteMeal = async (id) => {
+    try {
+      await axios.delete(`/api/meals/${id}`)
+      dispatch({
+        type: DELETE_MEAL,
+        payload: id,
+      })
+    } catch (error) {
+      dispatch({
+        type: MEAL_ERROR,
+        payload: error.response.msg,
+      })
+    }
   }
 
   const clearMeals = () => {
     dispatch({
       type: CLEAR_MEALS,
     })
+  }
+
+  // Update Current Ingredient
+  const updateMeal = async (meal) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await axios.put(`/api/meals/${meal._id}`, meal, config)
+      dispatch({
+        type: UPDATE_MEAL,
+        payload: res.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: MEAL_ERROR,
+        payload: error.response.msg,
+      })
+    }
   }
 
   // Set current Meal
@@ -86,15 +118,12 @@ const MealState = (props) => {
     dispatch({ type: CLEAR_CURRENT_MEAL })
   }
 
-  // Update Current Ingredient
-  const updateMeal = (meal) => {
-    dispatch({ type: UPDATE_MEAL, payload: meal })
-  }
-
   return (
     <MealContext.Provider
       value={{
         meals: state.meals,
+        current: state.current,
+        error: state.error,
         getMeals,
         addMeal,
         deleteMeal,

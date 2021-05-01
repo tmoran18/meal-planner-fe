@@ -3,6 +3,7 @@ import IngredientContext from '../../context/ingredient/ingredientContext'
 import AuthContext from '../../context/auth/authContext'
 import IngredientList from '../IngredientList/IngredientList'
 import Layout from '../Layout/Layout'
+import { Spinner } from '@chakra-ui/react'
 
 const Ingredients = () => {
   const ingredientContext = useContext(IngredientContext)
@@ -39,7 +40,13 @@ const Ingredients = () => {
         ingredients !== null && !loading ? (
           <IngredientList ingredients={ingredients} />
         ) : (
-          <div>Loading...</div>
+          <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='blue.500'
+            size='xl'
+          />
         )}
       </div>
     </Layout>

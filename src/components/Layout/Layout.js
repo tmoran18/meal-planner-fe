@@ -2,7 +2,7 @@ import TopNav from '../TopNav/TopNav'
 import SideNav from '../SideNav/SideNav'
 import Alerts from '../Alerts/Alerts'
 
-import styles from './index.module.css'
+import { Flex } from '@chakra-ui/layout'
 
 const Layout = ({ children }) => {
   return (
@@ -10,7 +10,9 @@ const Layout = ({ children }) => {
       <TopNav />
       <Alerts />
       <SideNav />
-      <main className={styles.container}>{children}</main>
+      <Flex wrap='wrap' justifyContent='center' p='80px' m='80px 0 0 300px'>
+        {children}
+      </Flex>
     </>
   )
 }

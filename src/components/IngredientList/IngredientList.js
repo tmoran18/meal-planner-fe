@@ -21,8 +21,7 @@ const IngredientList = ({ ingredients }) => {
       </div>
       <div className={styles.list_headings}>
         <span>Ingredient</span>
-        <span>Unit</span>
-        <span></span>
+        <span>Add / Delete</span>
       </div>
       {/* Filter Search Ingredients */}
       {ingredients
