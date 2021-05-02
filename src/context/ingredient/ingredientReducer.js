@@ -7,6 +7,7 @@ import {
   INGREDIENT_ERROR,
   CLEAR_INGREDIENTS,
   GET_INGREDIENTS,
+  INGREDIENT_LOADING,
 } from '../types'
 
 const ingredientReducer = (state, action) => {
@@ -57,6 +58,11 @@ const ingredientReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      }
+    case INGREDIENT_LOADING:
+      return {
+        ...state,
+        loading: true,
       }
     default:
       return state

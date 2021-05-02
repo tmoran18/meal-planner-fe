@@ -9,7 +9,14 @@ import {
   Button,
 } from '@chakra-ui/react'
 
-const Modal = ({ children, isOpen, onOpen, onClose, modalTitle, modalButtonText }) => {
+const Modal = ({
+  children,
+  isOpen,
+  onOpen,
+  onClose,
+  modalTitle,
+  modalButtonText,
+}) => {
   return (
     <ChakraModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -19,7 +26,13 @@ const Modal = ({ children, isOpen, onOpen, onClose, modalTitle, modalButtonText 
         <ModalBody>{children}</ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' mr={3} onClick={onClose}>
+          <Button
+            type='submit'
+            colorScheme='blue'
+            mr={3}
+            onClick={onClose}
+            form='submit-form'
+          >
             {modalButtonText}
           </Button>
         </ModalFooter>

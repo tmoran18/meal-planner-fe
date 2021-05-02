@@ -11,7 +11,6 @@ import Meals from './components/pages/meals'
 import CreateIngredient from './components/pages/create-ingredient'
 import CreateMeal from './components/pages/create-meal'
 import EditMeal from './components/pages/edit-meal'
-import EditIngredient from './components/pages/edit-ingredient'
 import Ingredients from './components/pages/ingredients'
 import Login from './components/pages/login'
 import Register from './components/pages/register'
@@ -54,13 +53,6 @@ const App = () => {
                 exact
                 path='/edit-meal'
                 component={EditMeal}
-                loading={loading}
-                token={token}
-              />
-              <PrivateRoute
-                exact
-                path='/edit-ingredient'
-                component={EditIngredient}
                 loading={loading}
                 token={token}
               />

@@ -11,6 +11,7 @@ import {
   UPDATE_INGREDIENT,
   INGREDIENT_ERROR,
   CLEAR_INGREDIENTS,
+  INGREDIENT_LOADING,
 } from '../types'
 
 const IngredientState = (props) => {
@@ -18,6 +19,7 @@ const IngredientState = (props) => {
     ingredients: null,
     current: null,
     error: null,
+    loading: true,
   }
 
   const [state, dispatch] = useReducer(ingredientReducer, intialState)
@@ -113,12 +115,18 @@ const IngredientState = (props) => {
     dispatch({ type: CLEAR_CURRENT_INGREDIENT })
   }
 
+  //  Set loading on Ingredient
+  const setIngredientLoading = () => {
+    dispatch({ type: INGREDIENT_LOADING })
+  }
+
   return (
     <IngredientContext.Provider
       value={{
         ingredients: state.ingredients,
         current: state.current,
         error: state.error,
+        loading: state.loading,
         getIngredients,
         addIngredient,
         deleteIngredient,
@@ -126,6 +134,7 @@ const IngredientState = (props) => {
         clearCurrentIngredient,
         updateIngredient,
         clearIngredients,
+        setIngredientLoading,
       }}
     >
       {props.children}

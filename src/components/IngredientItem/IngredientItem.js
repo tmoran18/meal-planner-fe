@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styles from './index.module.css'
 import IngredientContext from '../../context/ingredient/ingredientContext'
 import { useHistory } from 'react-router-dom'
@@ -18,7 +18,6 @@ const IngredientItem = ({ ingredient, index }) => {
     setCurrentIngredient,
     clearCurrentIngredient,
   } = ingredientContext
-  let history = useHistory()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const { name, _id } = ingredient
@@ -58,7 +57,13 @@ const IngredientItem = ({ ingredient, index }) => {
           <DeleteIcon cursor='pointer' onClick={onDelete} />
         </Box>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} onOpen={onOpen} modalTitle='Edit Ingredient' modalButtonText='Update Ingredient'>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        modalTitle='Edit Ingredient'
+        modalButtonText='Update Ingredient'
+      >
         <EditIngredient />
       </Modal>
     </Box>
