@@ -1,14 +1,30 @@
 import { useContext, useState } from 'react'
 import MealContext from '../../context/meal/mealContext'
+import ShoppingContext from '../../context/shopping/shoppingContext'
 import { Box } from '@chakra-ui/layout'
 import { useDisclosure } from '@chakra-ui/react'
 import { Fade } from '@chakra-ui/react'
-import { AddIcon, DeleteIcon, ViewIcon, EditIcon } from '@chakra-ui/icons'
+import {
+  AddIcon,
+  DeleteIcon,
+  ViewIcon,
+  EditIcon,
+  MinusIcon,
+} from '@chakra-ui/icons'
 import { useHistory } from 'react-router-dom'
 
 const MealCardOverlay = (props) => {
   const mealContext = useContext(MealContext)
-  const { setCurrentMeal, clearCurrentMeal, deleteMeal } = mealContext
+  const shoppingContext = useContext(ShoppingContext)
+  const {
+    setCurrentMeal,
+    clearCurrentMeal,
+    deleteMeal,
+    setSelectedForShopping,
+    clearSelectedForShopping,
+  } = mealContext
+  const { addMealToShopping, removeMealFromShopping } = shoppingContext
+
   const [overlayOpacity, setoverlayOpacity] = useState('0.00')
   const { isOpen, onToggle } = useDisclosure()
   let history = useHistory()
@@ -35,6 +51,21 @@ const MealCardOverlay = (props) => {
     clearCurrentMeal()
   }
 
+  // Add Meal to Shopping
+  const addToShop = (meal) => {
+    addMealToShopping(meal)
+    // This adds a selected property to the meal for shopping
+    const selectedMeal = Object.assign({}, meal, { shoppingSelected: true })
+    setSelectedForShopping(selectedMeal)
+  }
+
+  // Remove Meal from Shopping
+  const removeFromShop = (meal) => {
+    removeMealFromShopping(meal._id)
+    const unselectedMeal = Object.assign({}, meal, { shoppingSelected: false })
+    clearSelectedForShopping(unselectedMeal)
+  }
+
   return (
     <Box onMouseEnter={onHover} onMouseLeave={onHover}>
       <Fade in={isOpen}>
@@ -46,16 +77,30 @@ const MealCardOverlay = (props) => {
           h='100%'
           cursor='pointer'
         ></Box>
-        <AddIcon
-          onClick={() => alert('icon pressed')}
-          position='absolute'
-          color='white'
-          w={24}
-          h={24}
-          cursor='pointer'
-          top='85px'
-          left='112px'
-        />
+        {props.shoppingSelected ? (
+          <MinusIcon
+            onClick={() => removeFromShop(props)}
+            position='absolute'
+            color='white'
+            w={24}
+            h={24}
+            cursor='pointer'
+            top='85px'
+            left='112px'
+          />
+        ) : (
+          <AddIcon
+            onClick={() => addToShop(props)}
+            position='absolute'
+            color='white'
+            w={24}
+            h={24}
+            cursor='pointer'
+            top='85px'
+            left='112px'
+          />
+        )}
+
         {/* Top right icons Box */}
         <Box
           width={16}

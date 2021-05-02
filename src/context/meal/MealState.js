@@ -11,6 +11,8 @@ import {
   CLEAR_CURRENT_MEAL,
   CLEAR_MEALS,
   MEAL_ERROR,
+  SET_SELECTED_FOR_SHOPPING,
+  CLEAR_SELECTED_FOR_SHOPPING,
 } from '../types'
 
 const MealState = (props) => {
@@ -110,12 +112,31 @@ const MealState = (props) => {
 
   // Set current Meal
   const setCurrentMeal = (meal) => {
-    dispatch({ type: SET_CURRENT_MEAL, payload: meal })
+    dispatch({
+      type: SET_CURRENT_MEAL,
+      payload: meal,
+    })
   }
 
   // Clear Current Meal
   const clearCurrentMeal = () => {
     dispatch({ type: CLEAR_CURRENT_MEAL })
+  }
+
+  // Set as selected for shopping
+  const setSelectedForShopping = (meal) => {
+    dispatch({
+      type: SET_SELECTED_FOR_SHOPPING,
+      payload: meal,
+    })
+  }
+
+  // Remove as selected for shopping
+  const clearSelectedForShopping = (meal) => {
+    dispatch({
+      type: CLEAR_SELECTED_FOR_SHOPPING,
+      payload: meal,
+    })
   }
 
   return (
@@ -131,7 +152,8 @@ const MealState = (props) => {
         setCurrentMeal,
         clearCurrentMeal,
         clearMeals,
-        error: state.error,
+        setSelectedForShopping,
+        clearSelectedForShopping,
       }}
     >
       {props.children}

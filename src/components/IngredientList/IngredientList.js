@@ -15,9 +15,6 @@ const IngredientList = ({ ingredients }) => {
           placeholder='Search Ingredient...'
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Link to='/create-ingredient'>
-          <button className={styles.btn}>Add Ingredient</button>
-        </Link>
       </div>
       <div className={styles.list_headings}>
         <span>Ingredient</span>
@@ -38,6 +35,9 @@ const IngredientList = ({ ingredients }) => {
         .map((ingredient, index) => (
           <IngredientItem index={index} ingredient={ingredient} />
         ))}
+      <Link to='/create-ingredient'>
+        <button className={styles.btn}>Add Ingredient</button>
+      </Link>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import AuthContext from './context/auth/authContext'
 import MealState from './context/meal/MealState'
 import IngredientState from './context/ingredient/IngredientState'
 import AlertState from './context/alert/AlertState'
+import ShoppingState from './context/shopping/ShoppingState'
 import setAuthToken from './utils/setAuthToken'
 
 import PrivateRoute from './components/routing/PrivateRoute'
@@ -27,53 +28,55 @@ const App = () => {
     <AlertState>
       <MealState>
         <IngredientState>
-          <Router>
-            <Switch>
-              <PrivateRoute
-                exact
-                path='/'
-                component={Meals}
-                isAuthenticated={isAuthenticated}
-                loading={loading}
-                token={token}
-              />
-              <PrivateRoute
-                exact
-                path='/create-ingredient'
-                component={CreateIngredient}
-              />
-              <PrivateRoute
-                exact
-                path='/create-meal'
-                component={CreateMeal}
-                loading={loading}
-                token={token}
-              />
-              <PrivateRoute
-                exact
-                path='/edit-meal'
-                component={EditMeal}
-                loading={loading}
-                token={token}
-              />
-              <PrivateRoute
-                exact
-                path='/ingredients'
-                component={Ingredients}
-                loading={loading}
-                token={token}
-              />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/register' component={Register} />
-              <PrivateRoute
-                exact
-                path='/shopping-list'
-                component={ShoppingList}
-                loading={loading}
-                token={token}
-              />
-            </Switch>
-          </Router>
+          <ShoppingState>
+            <Router>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path='/'
+                  component={Meals}
+                  isAuthenticated={isAuthenticated}
+                  loading={loading}
+                  token={token}
+                />
+                <PrivateRoute
+                  exact
+                  path='/create-ingredient'
+                  component={CreateIngredient}
+                />
+                <PrivateRoute
+                  exact
+                  path='/create-meal'
+                  component={CreateMeal}
+                  loading={loading}
+                  token={token}
+                />
+                <PrivateRoute
+                  exact
+                  path='/edit-meal'
+                  component={EditMeal}
+                  loading={loading}
+                  token={token}
+                />
+                <PrivateRoute
+                  exact
+                  path='/ingredients'
+                  component={Ingredients}
+                  loading={loading}
+                  token={token}
+                />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register' component={Register} />
+                <PrivateRoute
+                  exact
+                  path='/shopping-list'
+                  component={ShoppingList}
+                  loading={loading}
+                  token={token}
+                />
+              </Switch>
+            </Router>
+          </ShoppingState>
         </IngredientState>
       </MealState>
     </AlertState>

@@ -1,14 +1,12 @@
-import { useContext, useState } from 'react'
-import styles from './index.module.css'
+import { useContext } from 'react'
+
 import IngredientContext from '../../context/ingredient/ingredientContext'
-import { useHistory } from 'react-router-dom'
-import { Box } from '@chakra-ui/layout'
-import { Flex } from '@chakra-ui/layout'
-import { Text } from '@chakra-ui/layout'
+
+import { Box, Flex, Text } from '@chakra-ui/layout'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { useDisclosure } from '@chakra-ui/hooks'
+
 import Modal from '../Modal/Modal'
-import { Button } from '@chakra-ui/button'
 import EditIngredient from '../EditIngredient/EditIngredient'
 
 const IngredientItem = ({ ingredient, index }) => {
@@ -22,14 +20,8 @@ const IngredientItem = ({ ingredient, index }) => {
 
   const { name, _id } = ingredient
 
-  const itemColorStyle = () => {
-    // if the index is even make this color
-    if (index % 2 === 0) {
-      return 'gray.100'
-    } else {
-      return ''
-    }
-  }
+  // if the index is even make this color
+  const itemColorStyle = () => index % 2 === 0 && 'gray.100'
 
   // Delete Ingredient
   const onDelete = () => {

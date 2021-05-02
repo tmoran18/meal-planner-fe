@@ -73,6 +73,7 @@ const CreateMealForm = () => {
       values.image_URL = imageURL.secure_url
       values.imageID = imageURL.public_id
       values.ingredients = ingredientsSelected
+      values.shoppingSelected = false
       mealContext.addMeal(values)
     } else {
       alert('Errors')

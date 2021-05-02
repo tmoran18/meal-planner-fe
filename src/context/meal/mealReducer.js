@@ -7,6 +7,8 @@ import {
   SET_CURRENT_MEAL,
   CLEAR_CURRENT_MEAL,
   CLEAR_MEALS,
+  SET_SELECTED_FOR_SHOPPING,
+  CLEAR_SELECTED_FOR_SHOPPING,
 } from '../types'
 
 const mealReducer = (state, action) => {
@@ -55,6 +57,15 @@ const mealReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      }
+    case SET_SELECTED_FOR_SHOPPING:
+    case CLEAR_SELECTED_FOR_SHOPPING:
+      return {
+        ...state,
+        meals: state.meals.map((meal) =>
+          meal._id === action.payload._id ? action.payload : meal
+        ),
+        loading: false,
       }
     default:
       return state
