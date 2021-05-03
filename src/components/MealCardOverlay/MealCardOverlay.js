@@ -47,7 +47,7 @@ const MealCardOverlay = (props) => {
 
   // Delete Meal
   const onDelete = () => {
-    deleteMeal(props._id)
+    deleteMeal(props._id, props.imageID)
     clearCurrentMeal()
   }
 

@@ -68,9 +68,21 @@ const MealState = (props) => {
   }
 
   // Delete Meal
-  const deleteMeal = async (id) => {
+  const deleteMeal = async (id, imageID) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
     try {
-      await axios.delete(`/api/meals/${id}`)
+      await axios.post(
+        `/api/meals-delete`,
+        {
+          id,
+          imageID,
+        },
+        config
+      )
       dispatch({
         type: DELETE_MEAL,
         payload: id,

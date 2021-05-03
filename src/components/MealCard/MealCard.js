@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Image } from '@chakra-ui/image'
 import { Box, Text } from '@chakra-ui/layout'
 import MealCardOverlay from '../MealCardOverlay/MealCardOverlay'
@@ -8,6 +7,7 @@ const MealCard = ({
   name,
   secondary_name,
   image_URL,
+  imageID,
   ingredients,
   shoppingSelected,
 }) => {
@@ -35,6 +35,7 @@ const MealCard = ({
         name={name}
         secondary_name={secondary_name}
         image_URL={image_URL}
+        imageID={imageID}
         ingredients={ingredients}
         shoppingSelected={shoppingSelected}
       />
