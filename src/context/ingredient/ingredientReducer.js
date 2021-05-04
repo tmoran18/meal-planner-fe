@@ -8,6 +8,7 @@ import {
   CLEAR_INGREDIENTS,
   GET_INGREDIENTS,
   INGREDIENT_LOADING,
+  CLEAR_INGREDIENT_LOADING,
 } from '../types'
 
 const ingredientReducer = (state, action) => {
@@ -63,6 +64,11 @@ const ingredientReducer = (state, action) => {
       return {
         ...state,
         loading: true,
+      }
+    case CLEAR_INGREDIENT_LOADING:
+      return {
+        ...state,
+        loading: false,
       }
     default:
       return state

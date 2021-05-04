@@ -12,6 +12,7 @@ import {
   INGREDIENT_ERROR,
   CLEAR_INGREDIENTS,
   INGREDIENT_LOADING,
+  CLEAR_INGREDIENT_LOADING,
 } from '../types'
 
 const IngredientState = (props) => {
@@ -120,6 +121,10 @@ const IngredientState = (props) => {
     dispatch({ type: INGREDIENT_LOADING })
   }
 
+  const clearIngredientLoading = () => {
+    dispatch({ type: CLEAR_INGREDIENT_LOADING })
+  }
+
   return (
     <IngredientContext.Provider
       value={{
@@ -135,6 +140,7 @@ const IngredientState = (props) => {
         updateIngredient,
         clearIngredients,
         setIngredientLoading,
+        clearIngredientLoading,
       }}
     >
       {props.children}

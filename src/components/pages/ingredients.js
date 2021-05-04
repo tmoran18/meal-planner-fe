@@ -18,7 +18,7 @@ const Ingredients = () => {
   useEffect(() => {
     getIngredients()
     //eslint-disable-next-line
-  }, [])
+  }, [loading])
 
   return (
     <Layout>
