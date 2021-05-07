@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react'
 import AuthContext from '../../context/auth/authContext'
 import Layout from '../Layout/Layout'
+import Steps from '../Steps/Steps'
 
 const ShoppingList = () => {
   const authContext = useContext(AuthContext)
@@ -11,7 +12,7 @@ const ShoppingList = () => {
   }, [])
   return (
     <Layout>
-      <div>Shopping List</div>
+      <Steps></Steps>
     </Layout>
   )
 }

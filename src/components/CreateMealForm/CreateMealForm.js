@@ -6,9 +6,11 @@ import DropDownList from '../DropDownList/DropDownList'
 import MealContext from '../../context/meal/mealContext'
 import IngredientContext from '../../context/ingredient/ingredientContext'
 import AuthContext from '../../context/auth/authContext'
+import Steps from '../Steps/Steps'
 
 const CreateMealForm = () => {
   const [imageSelected, setImageSelected] = useState('')
+  const [steps, setSteps] = useState([])
   const [ingredientsSelected, setIngredientsSelected] = useState([])
   const imageFileInput = useRef()
 
@@ -66,6 +68,10 @@ const CreateMealForm = () => {
     }
   }
 
+  const addSteps = (step) => {
+    setSteps((steps) => [...steps, step])
+  }
+
   const submitMealData = async (values) => {
     const imageURL = await uploadImage(imageSelected)
     axios.defaults.headers.common['x-auth-token'] = token
@@ -74,6 +80,7 @@ const CreateMealForm = () => {
       values.imageID = imageURL.public_id
       values.ingredients = ingredientsSelected
       values.shoppingSelected = false
+      values.steps = steps
       mealContext.addMeal(values)
     } else {
       alert('Errors')
@@ -161,6 +168,7 @@ const CreateMealForm = () => {
             removeIngredient={removeIngredient}
             selectedIngredients={ingredientsSelected}
           />
+          <Steps addSteps={addSteps} steps={steps} />
           <button className={styles.submit_btn} type='submit'>
             Create Meal
           </button>
