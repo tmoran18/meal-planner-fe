@@ -9,6 +9,7 @@ const MealCard = ({
   image_URL,
   imageID,
   ingredients,
+  steps,
   shoppingSelected,
 }) => {
   const isSelected = () => {
@@ -25,7 +26,7 @@ const MealCard = ({
       m='20px'
       textAlign='center'
       boxShadow='lg'
-      minW='320px'
+      minW='250px'
       maxW='320px'
       bg={isSelected}
       border={isSelected}
@@ -38,6 +39,7 @@ const MealCard = ({
         imageID={imageID}
         ingredients={ingredients}
         shoppingSelected={shoppingSelected}
+        steps={steps}
       />
       <Image src={image_URL} alt={`${name} with ${secondary_name}`} />
       <Box p='10px' color='gray.500'>

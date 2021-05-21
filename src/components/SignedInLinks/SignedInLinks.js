@@ -1,39 +1,40 @@
-import { useContext } from 'react'
-import styles from './index.module.css'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../context/auth/authContext'
-import MealContext from '../../context/meal/mealContext'
-import { useHistory } from 'react-router-dom'
+import { useBreakpointValue } from '@chakra-ui/react'
+import { Box, VStack } from '@chakra-ui/layout'
+import IconEditMeal from '../Icons/IconEditMeal'
+import IconMeals from '../Icons/IconMeals'
+import IconIngredients from '../Icons/IconIngredients'
+import IconEditIngredient from '../Icons/IconEditIngredient'
 
 const SignedInLinks = () => {
-  const authContext = useContext(AuthContext)
-  const mealContext = useContext(MealContext)
-  const { logout } = authContext
-  const { clearMeals } = mealContext
-
-  let history = useHistory()
-
-  const onSignout = () => {
-    logout()
-    clearMeals()
-    history.push('/login')
-  }
+  const mobile = useBreakpointValue({ base: true, md: false })
 
   return (
-    <>
-      <div className={styles.menu__container}>
-        <ul className={styles.menu}>
+    <Box>
+      {!mobile ? (
+        <VStack align='flex-start' px='6' py='8' spacing='6'>
           <Link to='/'>Meals</Link>
           <Link to='/create-meal'>Create Meal</Link>
           <Link to='/ingredients'>Ingredients</Link>
           <Link to='/create-ingredient'>Create Ingredient</Link>
-          <Link to='/shopping-list'>Shopping List</Link>
-        </ul>
-        <ul className={styles.menu}>
-          <button onClick={onSignout}>Sign Out</button>
-        </ul>
-      </div>
-    </>
+        </VStack>
+      ) : (
+        <VStack align='flex-start' px='4' py='8' spacing='8'>
+          <Link to='/'>
+            <IconMeals />
+          </Link>
+          <Link to='/create-meal'>
+            <IconEditMeal />
+          </Link>
+          <Link to='/ingredients'>
+            <IconIngredients />
+          </Link>
+          <Link to='/create-ingredient'>
+            <IconEditIngredient />
+          </Link>
+        </VStack>
+      )}
+    </Box>
   )
 }
 

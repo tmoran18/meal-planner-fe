@@ -12,6 +12,8 @@ import {
   MinusIcon,
 } from '@chakra-ui/icons'
 import { useHistory } from 'react-router-dom'
+import Modal from '../Modal/Modal'
+import Meal from '../Meal/Meal'
 
 const MealCardOverlay = (props) => {
   const mealContext = useContext(MealContext)
@@ -26,17 +28,25 @@ const MealCardOverlay = (props) => {
   const { addMealToShopping, removeMealFromShopping } = shoppingContext
 
   const [overlayOpacity, setoverlayOpacity] = useState('0.00')
-  const { isOpen, onToggle } = useDisclosure()
+  const [isHover, setIsHover] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   let history = useHistory()
 
   const onHover = (e) => {
     if (e.type === 'mouseenter') {
       setoverlayOpacity('0.65')
-      onToggle()
+      setIsHover(true)
     } else if (e.type === 'mouseleave') {
       setoverlayOpacity('0.0')
-      onToggle()
+      setIsHover(false)
     }
+  }
+
+  // View a meal
+  const onView = () => {
+    onOpen(isOpen)
+    setIsHover(false)
   }
 
   // Edit Meal
@@ -68,7 +78,7 @@ const MealCardOverlay = (props) => {
 
   return (
     <Box onMouseEnter={onHover} onMouseLeave={onHover}>
-      <Fade in={isOpen}>
+      <Fade in={isHover}>
         <Box
           position='absolute'
           opacity={overlayOpacity}
@@ -96,8 +106,8 @@ const MealCardOverlay = (props) => {
             w={24}
             h={24}
             cursor='pointer'
-            top='85px'
-            left='112px'
+            top='30%'
+            left={{ base: '30%', md: '35%' }}
           />
         )}
 
@@ -110,7 +120,13 @@ const MealCardOverlay = (props) => {
           display='flex'
           justifyContent='space-between'
         >
-          <ViewIcon cursor='pointer' color='white' w={4} h={4} />
+          <ViewIcon
+            onClick={onView}
+            cursor='pointer'
+            color='white'
+            w={4}
+            h={4}
+          />
           <EditIcon
             onClick={onEdit}
             cursor='pointer'
@@ -127,6 +143,15 @@ const MealCardOverlay = (props) => {
           />
         </Box>
       </Fade>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        modalTitle={props.name}
+        size='full'
+      >
+        <Meal {...props} />
+      </Modal>
     </Box>
   )
 }

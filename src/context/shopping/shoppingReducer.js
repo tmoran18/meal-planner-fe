@@ -1,4 +1,8 @@
-import { ADD_MEAL_SHOPPING, REMOVE_MEAL_SHOPPING } from '../types'
+import {
+  ADD_MEAL_SHOPPING,
+  CLEAR_SHOPPING_LIST,
+  REMOVE_MEAL_SHOPPING,
+} from '../types'
 
 const shoppingReducer = (state, action) => {
   switch (action.type) {
@@ -16,9 +20,21 @@ const shoppingReducer = (state, action) => {
         ),
         loading: false,
       }
+    case CLEAR_SHOPPING_LIST:
+      return {
+        ...state,
+        shoppingListMeals: [],
+        loading: false,
+      }
     default:
       return state
   }
 }
+
+const arr = [
+  { id: '123', name: 'Beans', qty: '4' },
+  { id: '124', name: 'Carrots', qty: '2' },
+  { id: '123', name: 'Beans', qty: '2' },
+]
 
 export default shoppingReducer

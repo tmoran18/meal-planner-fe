@@ -13,12 +13,13 @@ const Modal = ({
   children,
   isOpen,
   onOpen,
+  size,
   onClose,
   modalTitle,
   modalButtonText,
 }) => {
   return (
-    <ChakraModal isOpen={isOpen} onClose={onClose}>
+    <ChakraModal size={size} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{modalTitle}</ModalHeader>
@@ -26,15 +27,17 @@ const Modal = ({
         <ModalBody>{children}</ModalBody>
 
         <ModalFooter>
-          <Button
-            type='submit'
-            colorScheme='blue'
-            mr={3}
-            onClick={onClose}
-            form='submit-form'
-          >
-            {modalButtonText}
-          </Button>
+          {modalButtonText && (
+            <Button
+              type='submit'
+              colorScheme='blue'
+              mr={3}
+              onClick={onClose}
+              form='submit-form'
+            >
+              {modalButtonText}
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </ChakraModal>

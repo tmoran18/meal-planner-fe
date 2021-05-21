@@ -1,7 +1,11 @@
 import { useReducer } from 'react'
 import ShoppingContext from './shoppingContext'
 import shoppingReducer from './shoppingReducer'
-import { ADD_MEAL_SHOPPING, REMOVE_MEAL_SHOPPING } from '../types'
+import {
+  ADD_MEAL_SHOPPING,
+  REMOVE_MEAL_SHOPPING,
+  CLEAR_SHOPPING_LIST,
+} from '../types'
 
 const ShoppingState = (props) => {
   const intialState = {
@@ -27,6 +31,12 @@ const ShoppingState = (props) => {
     })
   }
 
+  const clearShoppingList = () => {
+    dispatch({
+      type: CLEAR_SHOPPING_LIST,
+    })
+  }
+
   return (
     <ShoppingContext.Provider
       value={{
@@ -36,6 +46,7 @@ const ShoppingState = (props) => {
         loading: state.loading,
         addMealToShopping,
         removeMealFromShopping,
+        clearShoppingList,
       }}
     >
       {props.children}
