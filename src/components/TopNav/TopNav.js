@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import AuthContext from '../../context/auth/authContext'
 import MealContext from '../../context/meal/mealContext'
 import { useHistory, Link } from 'react-router-dom'
@@ -6,10 +6,13 @@ import { useHistory, Link } from 'react-router-dom'
 import { Box, Flex, Heading, Link as ChakraLink } from '@chakra-ui/layout'
 import { Avatar } from '@chakra-ui/avatar'
 import { Button } from '@chakra-ui/button'
+import { useMediaQuery } from '@chakra-ui/media-query'
 
 const TopNav = () => {
   const authContext = useContext(AuthContext)
   const mealContext = useContext(MealContext)
+  const [logoSize, setLogoSize] = useState('desktop')
+  const [isMobile] = useMediaQuery('(max-width: 765px)')
 
   const { user, logout, isAuthenicated, loading, token } = authContext
   const { clearMeals } = mealContext
@@ -36,10 +39,18 @@ const TopNav = () => {
       borderBottom='2px solid'
       borderColor='gray.300'
       h='80px'
+      zIndex='100'
     >
-      <Heading as='h2' size='lg' color='gray.500' fontWeight='300'>
-        MEAL <span style={{ fontWeight: 500 }}>PLANNER</span>
-      </Heading>
+      {!isMobile ? (
+        <Heading as='h2' size='lg' color='gray.500' fontWeight='300'>
+          MEAL <span style={{ fontWeight: 500 }}>PLANNER</span>
+        </Heading>
+      ) : (
+        <Heading as='h2' size='lg' color='gray.500' fontWeight='300'>
+          M<span style={{ fontWeight: 500 }}>P</span>
+        </Heading>
+      )}
+
       <Box color='gray.500' fontWeight='500' display='flex' alignItems='center'>
         {user ? (
           <Box display='flex' alignItems='center'>

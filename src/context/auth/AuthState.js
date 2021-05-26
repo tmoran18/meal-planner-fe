@@ -11,6 +11,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT,
+  SET_LOADING,
 } from '../types'
 import axios from 'axios'
 
@@ -18,7 +19,7 @@ const AuthState = (props) => {
   const intialState = {
     token: localStorage.getItem('token'),
     isAuthenicated: null,
-    loading: true,
+    loading: false,
     user: null,
     error: null,
   }
@@ -93,6 +94,11 @@ const AuthState = (props) => {
     dispatch({ type: CLEAR_ERRORS })
   }
 
+  // Set Loading
+  const setLoading = () => {
+    dispatch({ type: SET_LOADING })
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -106,6 +112,7 @@ const AuthState = (props) => {
         loadUser,
         login,
         logout,
+        setLoading,
       }}
     >
       {props.children}

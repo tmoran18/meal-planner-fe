@@ -13,7 +13,11 @@ const Layout = ({ children }) => {
       <Flex
         wrap='wrap'
         justifyContent='center'
-        p='80px'
+        p={{
+          base: '50px 10px',
+          sm: '50px 10px',
+          md: '80px',
+        }}
         m={{
           base: '80px 0 0 80px',
           sm: '80px 0 0 80px',

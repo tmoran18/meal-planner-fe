@@ -5,13 +5,17 @@ import { useContext, useEffect } from 'react'
 import Layout from '../Layout/Layout'
 
 import '../../styles/form.css'
+import { Heading } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
+import { Spinner } from '@chakra-ui/spinner'
 
 const Register = (props) => {
   const alertContext = useContext(AlertContext)
   const authContext = useContext(AuthContext)
 
   const { setAlert } = alertContext
-  const { register, error, clearErrors, isAuthenicated } = authContext
+  const { register, error, clearErrors, isAuthenicated, loading, setLoading } =
+    authContext
 
   useEffect(() => {
     if (isAuthenicated) {
@@ -38,66 +42,91 @@ const Register = (props) => {
   }
   return (
     <Layout>
-      <Formik
-        initialValues={{
-          name: '',
-          email: '',
-          password: '',
-          password2: '',
-        }}
-        onSubmit={(values, { resetForm, setSubmitting }) => {
-          // Submit the data
-          registerSubmit(values)
-          resetForm()
-          setSubmitting(false)
-        }}
-      >
-        <Form className='form'>
-          <h2>Register Account</h2>
-          <label className='label' htmlFor='name'>
-            Name *
-          </label>
-          <Field className='input' id='name' name='name' required />
+      {loading ? (
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      ) : (
+        <Formik
+          initialValues={{
+            name: '',
+            email: '',
+            password: '',
+            password2: '',
+          }}
+          onSubmit={(values, { resetForm, setSubmitting }) => {
+            // Submit the data
+            setLoading()
+            registerSubmit(values)
+            resetForm()
+            setSubmitting(false)
+          }}
+        >
+          <Form className='form'>
+            <Heading as='h3' align='center' mb='5' color='gray.500' size='md'>
+              Register Account
+            </Heading>
+            <label className='label' htmlFor='name'>
+              Name *
+            </label>
+            <Field className='input' id='name' name='name' required />
 
-          <label className='label' htmlFor='email'>
-            Email *
-          </label>
-          <Field
-            className='input'
-            type='email'
-            id='email'
-            name='email'
-            required
-          />
+            <label className='label' htmlFor='email'>
+              Email *
+            </label>
+            <Field
+              className='input'
+              type='email'
+              id='email'
+              name='email'
+              required
+            />
 
-          <label className='label' htmlFor='password'>
-            Password *
-          </label>
-          <Field
-            className='input'
-            minLength={6}
-            type='password'
-            id='password'
-            name='password'
-            required
-          />
+            <label className='label' htmlFor='password'>
+              Password *
+            </label>
+            <Field
+              className='input'
+              minLength={6}
+              type='password'
+              id='password'
+              name='password'
+              required
+            />
 
-          <label className='label' htmlFor='password'>
-            Re-enter Password *
-          </label>
-          <Field
-            className='input'
-            minLength={6}
-            type='password'
-            id='password2'
-            name='password2'
-            required
-          />
-          <button className='submit_btn' type='submit'>
-            Register
-          </button>
-        </Form>
-      </Formik>
+            <label className='label' htmlFor='password'>
+              Re-enter Password *
+            </label>
+            <Field
+              className='input'
+              minLength={6}
+              type='password'
+              id='password2'
+              name='password2'
+              required
+            />
+
+            <Button
+              _hover={{
+                background: 'white',
+                color: 'gray.500',
+                border: '1px solid',
+                borderColor: 'gray.500',
+              }}
+              bg='gray.500'
+              color='white'
+              mt='3'
+              type='submit'
+            >
+              Register
+            </Button>
+          </Form>
+        </Formik>
+      )}
     </Layout>
   )
 }

@@ -7,6 +7,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   CLEAR_ERRORS,
+  SET_LOADING,
 } from '../types'
 
 const authReducer = (state, action) => {
@@ -29,7 +30,7 @@ const authReducer = (state, action) => {
         ...state,
         token: null,
         isAuthenicated: false,
-        loading: true,
+        loading: false,
         user: null,
         error: action.payload,
       }
@@ -44,6 +45,11 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
+      }
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       }
     default:
       return state

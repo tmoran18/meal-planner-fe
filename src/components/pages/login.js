@@ -3,13 +3,17 @@ import AuthContext from '../../context/auth/authContext'
 import { Formik, Field, Form } from 'formik'
 import { useContext, useEffect } from 'react'
 import Layout from '../Layout/Layout'
+import { Heading } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
+import { Spinner } from '@chakra-ui/spinner'
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext)
   const authContext = useContext(AuthContext)
 
   const { setAlert } = alertContext
-  const { login, error, clearErrors, isAuthenicated } = authContext
+  const { login, error, clearErrors, isAuthenicated, loading, setLoading } =
+    authContext
 
   useEffect(() => {
     if (isAuthenicated) {
@@ -29,43 +33,69 @@ const Login = (props) => {
       password: values.password,
     })
   }
+
   return (
     <Layout>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        onSubmit={(values, { resetForm, setSubmitting }) => {
-          // Submit the data
-          loginSubmit(values)
-          resetForm()
-          setSubmitting(false)
-        }}
-      >
-        <Form className='form'>
-          <h2>Login</h2>
-          <label className='label' htmlFor='email'>
-            Email *
-          </label>
-          <Field className='input' id='email' name='email' required />
+      {loading ? (
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      ) : (
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          onSubmit={(values, { resetForm, setSubmitting }) => {
+            // Submit the data
+            setLoading()
+            loginSubmit(values)
+            resetForm()
+            setSubmitting(false)
+          }}
+        >
+          <Form className='form'>
+            <Heading as='h3' align='center' mb='5' color='gray.500' size='md'>
+              Login
+            </Heading>
 
-          <label className='label' htmlFor='password'>
-            Password *
-          </label>
+            <label className='label' htmlFor='email'>
+              Email *
+            </label>
+            <Field className='input' id='email' name='email' required />
 
-          <Field
-            className='input'
-            type='password'
-            id='password'
-            name='password'
-            required
-          />
-          <button type='submit' className='submit_btn'>
-            Sign In
-          </button>
-        </Form>
-      </Formik>
+            <label className='label' htmlFor='password'>
+              Password *
+            </label>
+            <Field
+              className='input'
+              type='password'
+              id='password'
+              name='password'
+              required
+            />
+
+            <Button
+              _hover={{
+                background: 'white',
+                color: 'gray.500',
+                border: '1px solid',
+                borderColor: 'gray.500',
+              }}
+              bg='gray.500'
+              color='white'
+              mt='3'
+              type='submit'
+            >
+              Sign In
+            </Button>
+          </Form>
+        </Formik>
+      )}
     </Layout>
   )
 }
