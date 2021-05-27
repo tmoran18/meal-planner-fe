@@ -1,12 +1,13 @@
 import { useState, useRef, useContext, useEffect } from 'react'
 import { Formik, Field, Form } from 'formik'
 import axios from 'axios'
-import styles from './index.module.css'
 import DropDownList from '../DropDownList/DropDownList'
 import MealContext from '../../context/meal/mealContext'
 import IngredientContext from '../../context/ingredient/ingredientContext'
 import AuthContext from '../../context/auth/authContext'
 import Steps from '../Steps/Steps'
+import { Heading } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
 
 const CreateMealForm = () => {
   const [imageSelected, setImageSelected] = useState('')
@@ -92,89 +93,92 @@ const CreateMealForm = () => {
   }
 
   return (
-    <div className={styles.form_container}>
-      <h1
-        style={{
-          color: '#828ea6',
-          textAlign: 'center',
-          marginBottom: '50px',
-          fontWeight: '500',
-        }}
-      >
-        Create a Meal
-      </h1>
-      <Formik
-        initialValues={{
-          name: '',
-          secondary_name: '',
-        }}
-        onSubmit={(values, { resetForm, setSubmitting }) => {
-          // Submit the data
-          submitMealData(values)
-          // Clear the form & state
-          imageFileInput.current.value = ''
-          setIngredientsSelected([])
-          setImageSelected('')
-          resetForm()
-          setSubmitting(false)
-        }}
-      >
-        <Form className={styles.form}>
-          <label className={styles.label} htmlFor='name'>
-            Name
-          </label>
-          <Field className={styles.input} id='name' name='name' required />
+    <Formik
+      initialValues={{
+        name: '',
+        secondary_name: '',
+      }}
+      onSubmit={(values, { resetForm, setSubmitting }) => {
+        // Submit the data
+        submitMealData(values)
+        // Clear the form & state
+        imageFileInput.current.value = ''
+        setIngredientsSelected([])
+        setImageSelected('')
+        resetForm()
+        setSubmitting(false)
+      }}
+    >
+      <Form className='form'>
+        <Heading as='h3' align='center' mb='5' color='gray.500' size='md'>
+          Create Meal
+        </Heading>
+        <label className='label' htmlFor='name'>
+          Name
+        </label>
+        <Field className='input' id='name' name='name' required />
 
-          <label className={styles.label} htmlFor='secondary_name'>
-            Blurb
+        <label className='label' htmlFor='secondary_name'>
+          Blurb
+        </label>
+        <Field
+          className='input'
+          id='secondary_name'
+          name='secondary_name'
+          required
+        />
+
+        <div className='file_input'>
+          <label className='label' htmlFor='secondary_name'>
+            Meal Image
           </label>
-          <Field
-            className={styles.input}
-            id='secondary_name'
-            name='secondary_name'
+          <input
+            ref={imageFileInput}
+            type='file'
+            name='imageURL'
+            id='imageURL'
             required
+            onChange={(e) => setImageSelected(e.target.files[0])}
           />
-
-          <div className={styles.file_input}>
-            <label className={styles.label} htmlFor='secondary_name'>
-              Meal Image
-            </label>
-            <input
-              ref={imageFileInput}
-              type='file'
-              name='imageURL'
-              id='imageURL'
-              required
-              onChange={(e) => setImageSelected(e.target.files[0])}
-            />
-            <div className={styles.file_input_cancel}>
-              or{' '}
-              <span
-                onClick={resetImageInput}
-                style={{
-                  fontWeight: 600,
-                  fontSize: '12px',
-                  cursor: 'pointer',
-                }}
-              >
-                cancel
-              </span>
-            </div>
+          <div className='file_input_cancel'>
+            or{' '}
+            <span
+              onClick={resetImageInput}
+              style={{
+                fontWeight: 600,
+                fontSize: '12px',
+                cursor: 'pointer',
+              }}
+            >
+              cancel
+            </span>
           </div>
+        </div>
 
-          <DropDownList
-            ingredients={ingredients}
-            addIngredient={addIngredient}
-            removeIngredient={removeIngredient}
-            selectedIngredients={ingredientsSelected}
-          />
-          <Steps addSteps={addSteps} steps={steps} />
-          <button className={styles.submit_btn} type='submit'>
-            Create Meal
-          </button>
-        </Form>
-      </Formik>
-    </div>
+        <DropDownList
+          ingredients={ingredients}
+          addIngredient={addIngredient}
+          removeIngredient={removeIngredient}
+          selectedIngredients={ingredientsSelected}
+        />
+        <Steps addSteps={addSteps} steps={steps} />
+
+        <Button
+          _hover={{
+            background: 'white',
+            color: 'gray.500',
+            border: '1px solid',
+            borderColor: 'gray.500',
+          }}
+          bg='gray.500'
+          color='white'
+          mt='3'
+          type='submit'
+        >
+          Create Meal
+        </Button>
+      </Form>
+    </Formik>
   )
 }
 

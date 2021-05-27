@@ -42,35 +42,6 @@ const Meals = (props) => {
 
   return (
     <Layout>
-      <Flex
-        width='100%'
-        justify='space-between'
-        align='center'
-        flexDirection={{ base: 'column', lg: 'row' }}
-      >
-        <Button
-          mb={{ base: 8, lg: 0 }}
-          borderRadius='100px'
-          onClick={createShoppingList}
-        >
-          View Shopping List
-        </Button>
-        <Flex align='center'>
-          <Text mr='2' color='gray.500'>
-            Meals Selected
-          </Text>
-          <Box
-            borderRadius='100px'
-            color='green.700'
-            fontWeight='bold'
-            px='5'
-            py='1'
-            bg='rgba(136, 188, 127, 0.30)'
-          >
-            {shoppingListMeals.length}
-          </Box>
-        </Flex>
-      </Flex>
       {/* If no meals */}
       {meals !== null && meals.length === 0 && !loading ? (
         <Link to='/create-meal'>
@@ -78,7 +49,44 @@ const Meals = (props) => {
         </Link>
       ) : // There are Meals
       meals !== null && !loading ? (
-        meals.map((meal) => <MealCard key={meal._id} {...meal} />)
+        <Box w='100%' maxW='1080px'>
+          <Flex
+            width='100%'
+            justify='space-between'
+            align='center'
+            flexDirection={{ base: 'column', lg: 'row' }}
+          >
+            <Button
+              mb={{ base: 8, lg: 0 }}
+              ml={{ base: '0', md: '3' }}
+              borderRadius='100px'
+              onClick={createShoppingList}
+            >
+              View Shopping List
+            </Button>
+            <Flex align='center'>
+              <Text mr='2' color='gray.500'>
+                Meals Selected
+              </Text>
+              <Box
+                borderRadius='100px'
+                color='green.700'
+                fontWeight='bold'
+                px='5'
+                py='1'
+                mr={{ base: '0', md: '3' }}
+                bg='rgba(136, 188, 127, 0.30)'
+              >
+                {shoppingListMeals.length}
+              </Box>
+            </Flex>
+          </Flex>
+          <Flex justify='center' w='100%' maxW='1080px' wrap='wrap'>
+            {meals.map((meal) => (
+              <MealCard key={meal._id} {...meal} />
+            ))}
+          </Flex>
+        </Box>
       ) : (
         // Loading State
         <Spinner
