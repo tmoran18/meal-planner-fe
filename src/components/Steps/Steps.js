@@ -5,11 +5,13 @@ const Steps = ({ addSteps, steps }) => {
   let [value, setValue] = React.useState('')
 
   let handleInputChange = (e) => {
+    e.preventDefault()
     let inputValue = e.target.value
     setValue(inputValue)
   }
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     addSteps(value)
     setValue('')
   }

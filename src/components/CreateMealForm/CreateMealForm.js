@@ -1,4 +1,5 @@
 import { useState, useRef, useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Formik, Field, Form } from 'formik'
 import axios from 'axios'
 import DropDownList from '../DropDownList/DropDownList'
@@ -14,6 +15,9 @@ const CreateMealForm = () => {
   const [steps, setSteps] = useState([])
   const [ingredientsSelected, setIngredientsSelected] = useState([])
   const imageFileInput = useRef()
+  const [inputValue, setInputValue] = useState('')
+
+  let history = useHistory()
 
   const mealContext = useContext(MealContext)
   const ingredientContext = useContext(IngredientContext)
@@ -107,6 +111,7 @@ const CreateMealForm = () => {
         setImageSelected('')
         resetForm()
         setSubmitting(false)
+        history.push('/')
       }}
     >
       <Form className='form'>
@@ -162,7 +167,11 @@ const CreateMealForm = () => {
           selectedIngredients={ingredientsSelected}
         />
         <Steps addSteps={addSteps} steps={steps} />
-
+        <input
+          type='text'
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
         <Button
           _hover={{
             background: 'white',

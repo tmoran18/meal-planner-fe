@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 import IngredientItem from '../IngredientItem/IngredientItem'
+import { Button } from '@chakra-ui/button'
 
 const IngredientList = ({ ingredients }) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -36,7 +37,20 @@ const IngredientList = ({ ingredients }) => {
           <IngredientItem index={index} ingredient={ingredient} />
         ))}
       <Link to='/create-ingredient'>
-        <button className={styles.btn}>Add Ingredient</button>
+        <Button
+          _hover={{
+            background: 'white',
+            color: 'gray.500',
+            border: '1px solid',
+            borderColor: 'gray.500',
+          }}
+          bg='gray.500'
+          color='white'
+          my='6'
+          type='submit'
+        >
+          Add Ingredient
+        </Button>
       </Link>
     </div>
   )
