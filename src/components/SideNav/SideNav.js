@@ -29,12 +29,12 @@ const SideNav = () => {
     >
       {loading && token ? (
         <></>
-      ) : isAuthenicated ? (
-        <div>
-          <SignedInLinks />
-        </div>
       ) : (
-        <SignedOutLinks />
+        isAuthenicated && (
+          <div>
+            <SignedInLinks />
+          </div>
+        )
       )}
     </Box>
   )

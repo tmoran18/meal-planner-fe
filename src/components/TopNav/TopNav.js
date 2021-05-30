@@ -59,7 +59,7 @@ const TopNav = () => {
           </Box>
         ) : (
           <Box>
-            <Link to='/register'>Register</Link>
+            <Link to='/register'>Register</Link>&nbsp;&nbsp;
             <Link to='/login'>Sign In</Link>
           </Box>
         )}

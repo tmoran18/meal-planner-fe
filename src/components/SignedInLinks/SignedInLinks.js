@@ -12,7 +12,14 @@ const SignedInLinks = () => {
   return (
     <Box>
       {!mobile ? (
-        <VStack align='flex-start' px='6' py='8' spacing='6'>
+        <VStack
+          align='flex-start'
+          px='6'
+          py='8'
+          spacing='6'
+          color='gray.500'
+          fontWeight='500'
+        >
           <Link to='/'>Meals</Link>
           <Link to='/create-meal'>Create Meal</Link>
           <Link to='/ingredients'>Ingredients</Link>
