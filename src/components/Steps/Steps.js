@@ -1,5 +1,5 @@
 import React from 'react'
-import { Textarea, Text, Button, list } from '@chakra-ui/react'
+import { Textarea, Text, Button, Box } from '@chakra-ui/react'
 
 const Steps = ({ addSteps, steps }) => {
   let [value, setValue] = React.useState('')
@@ -15,15 +15,36 @@ const Steps = ({ addSteps, steps }) => {
   }
 
   return (
-    <>
-      <Text mb='8px'>{`Step ${steps.length + 1}`}</Text>
+    <Box mt='3'>
+      <Text
+        fontSize='14px'
+        fontWeight='500'
+        color='gray.500'
+        my='10px'
+      >{`Step ${steps.length + 1}`}</Text>
       <Textarea
         value={value}
         onChange={handleInputChange}
-        placeholder='Here is a sample placeholder'
+        placeholder='Enter your recipes steps here'
         size='sm'
+        bg='var(--l_grey)'
       />
-      <Button onClick={onSubmit}>Add Step</Button>
+      <Button
+        onClick={onSubmit}
+        _hover={{
+          background: 'white',
+          color: 'gray.500',
+          border: '1px solid',
+          borderColor: 'gray.500',
+        }}
+        bg='gray.500'
+        color='white'
+        mt='3'
+        mb='6'
+        type='submit'
+      >
+        Add Step
+      </Button>
       {steps.length !== 0 && (
         <ul>
           {steps.map((step, index) => (
@@ -34,7 +55,7 @@ const Steps = ({ addSteps, steps }) => {
           ))}
         </ul>
       )}
-    </>
+    </Box>
   )
 }
 
