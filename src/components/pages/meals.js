@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import MealContext from '../../context/meal/mealContext'
 import IngredientContext from '../../context/ingredient/ingredientContext'
 import AuthContext from '../../context/auth/authContext'
@@ -23,13 +23,19 @@ const Meals = (props) => {
   const authContext = useContext(AuthContext)
   const shoppingContext = useContext(ShoppingContext)
   const { isOpen, onOpen, onClose } = useDisclosure()
+  let history = useHistory()
+
+  const { isAuthenticated, token, loadUser } = authContext
 
   const { meals, getMeals, loading } = mealContext
   const { getIngredients } = ingredientContext
   const { shoppingListMeals, clearShoppingList } = shoppingContext
 
   useEffect(() => {
-    authContext.loadUser()
+    loadUser()
+    if (!isAuthenticated && !token) {
+      history.push('/login')
+    }
     getMeals()
     getIngredients()
     clearShoppingList()
