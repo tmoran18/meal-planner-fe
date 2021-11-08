@@ -1,4 +1,4 @@
-# Meal planner Front End
+# Project ARCHIVED - Meal planner Front End
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses React Router, Chakra-UI and Formik. It uses the React context API for state management dispatching to a reducer.
 
